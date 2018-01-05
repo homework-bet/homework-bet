@@ -1,0 +1,8 @@
+{
+    "app_name": "homework-bet",
+    "db_host": "mongodb://localhost/",
+    "db_name_prod": "homework-bet-prod",
+    "db_name_dev": "homework-bet-dev",
+    "port":   3000,
+    "ip": "localhost"
+}
