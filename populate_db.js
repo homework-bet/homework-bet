@@ -26,18 +26,17 @@ function popDatabase() {
     user.save( function (err, user) {
 
         if (err) {
-            console.log(`addFakeUser error: ${err}.`);
+            console.log(`error adding user: ${err}.`);
         } 
         else {
 
             // on save, connect a course to the saved user
             console.log(`User added: ${user.firstName} ${user.lastName}.`);
-
             course = createFakeCourse( user );
             course.save(function (err, course) {
 
                 if (err) {
-                    console.log(`addFakeUser error: ${err}.`);
+                    console.log(`error adding course: ${err}.`);
                 } else {
                     console.log(`Course added: ${course.name}.`);
 
@@ -61,6 +60,7 @@ function createFakeUser() {
     const user = new UserModel({
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
+        password: faker.internet.password(),
         email: faker.internet.email(),
     });
 
@@ -78,6 +78,9 @@ function createFakeCourse( user ) {
     const course = new CourseModel({
         name: courseName,
         user: user,
+        startDate: new Date(),
+        // hard-code end date for now (jan 1, 2020) --> month is 0-indexed
+        endDate: new Date( 20, 0 ),
     });
 
     return course;
