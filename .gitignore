@@ -4,6 +4,11 @@ app_settings.json
 
 ### NODE
 
+### C9 CONFIG
+# https://community.c9.io/t/setting-up-mongodb/1717
+c9_data/
+mongod
+
 # Logs
 logs
 *.log
