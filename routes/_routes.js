@@ -33,4 +33,18 @@ router.use('/courses', poolRoutes);
 router.use('/payments', paymentRoutes);
 router.use('/verifications', verificationRoutes);
 
+/* Route handler for 404 - page not found */
+router.use(function(req, res) {
+	res.status(404);
+	res.render('404');
+});
+
+/* Route handler for 500 - server error */
+router.use(function(err, req, res, next) {
+	console.error(err.stack);
+	res.type('plain/text');
+	res.status(500);
+	res.render('500');
+});
+
 module.exports = router;
