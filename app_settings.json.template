@@ -3,6 +3,7 @@
     "db_host": "mongodb://localhost/",
     "db_name_prod": "homework-bet-prod",
     "db_name_dev": "homework-bet-dev",
+    "db_name_test": "homework-bet-test",
     "port":   3000,
     "ip": "localhost"
 }
