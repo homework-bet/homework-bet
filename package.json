@@ -1,0 +1,39 @@
+{
+  "name": "homework-bet",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/homework-bet/homework-bet.git"
+  },
+  "keywords": [
+    "education",
+    "mongoose",
+    "express",
+    "angular",
+    "node.js"
+  ],
+  "author": "homework-bet",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/homework-bet/homework-bet/issues"
+  },
+  "homepage": "https://github.com/homework-bet/homework-bet#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "mongoose": "^5.0.0-rc2",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^4.4.0"
+  },
+  "devDependencies": {
+    "faker": "^4.1.0"
+  }
+}

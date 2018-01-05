@@ -1,0 +1,12 @@
+<% include ../_partials/header %>
+
+    <h1>User - <%= user.firstName + " " + user.lastName %></h1>
+
+    <ul>
+        <li>email - <%= user.email %></li>
+        <% courses.forEach(function(course) { %>
+            <li>Course - <%= course.name %></li>
+        <% }) %>
+    </ul>
+
+<% include ../_partials/footer %>
