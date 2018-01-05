@@ -21,33 +21,33 @@ popDatabase();
 
 function popDatabase() {
 
-    // create user, save them    	
+    // create user, save them       
     user = createFakeUser();
-	user.save( function (err, user) {
+    user.save( function (err, user) {
 
-		if (err) {
-			console.log(`addFakeUser error: ${err}.`);
-		} 
-		else {
+        if (err) {
+            console.log(`addFakeUser error: ${err}.`);
+        } 
+        else {
 
             // on save, connect a course to the saved user
-			console.log(`User added: ${user.firstName} ${user.lastName}.`);
+            console.log(`User added: ${user.firstName} ${user.lastName}.`);
 
-			course = createFakeCourse( user );
-			course.save(function (err, course) {
+            course = createFakeCourse( user );
+            course.save(function (err, course) {
 
-				if (err) {
-					console.log(`addFakeUser error: ${err}.`);
-				} else {
-					console.log(`Course added: ${course.name}.`);
+                if (err) {
+                    console.log(`addFakeUser error: ${err}.`);
+                } else {
+                    console.log(`Course added: ${course.name}.`);
 
                     console.log(user);
                     console.log(course);
-				}
+                }
 
-			});
-		}
-	});
+            });
+        }
+    });
 }
 
 
@@ -57,14 +57,14 @@ function popDatabase() {
 
 function createFakeUser() {
 
-	// create user, save them to the db
+    // create user, save them to the db
     const user = new UserModel({
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
         email: faker.internet.email(),
     });
 
-	return user;
+    return user;
 }
 
 /*
@@ -73,13 +73,13 @@ function createFakeUser() {
 
 function createFakeCourse( user ) {
 
-	// create course, attach to user
+    // create course, attach to user
     const courseName = faker.company.catchPhraseNoun() + " " + Math.ceil(Math.random() * 400);
     const course = new CourseModel({
         name: courseName,
         user: user,
     });
 
-	return course;
+    return course;
 }
 
