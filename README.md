@@ -7,4 +7,4 @@
 1. Adjust app_settings.json (if desired)
 1. Terminal: npm install
 1. Terminal: node populate_db.js (if desired)
-1. Terminal: node app.js
+1. Terminal: npm start
