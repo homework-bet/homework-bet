@@ -7,6 +7,7 @@ const UserModel = require('./models/UserModel');
 const VerificationModel = require('./models/VerificationModel');
 
 const UserFactory = require('./factories/User');
+const CourseFactory = require('./factories/Course');
 
 /*
  * populate our db: 
@@ -32,7 +33,7 @@ function popDatabase() {
         }
     });
 
-    const course = createFakeCourse(user);
+    const course = new CourseModel( CourseFactory.random() ); 
     course.save(function (err, course) {
 
         if (err) {
@@ -40,25 +41,6 @@ function popDatabase() {
         } else {
             console.log(`Course added: ${course.name}.`);
         }
+
     });
 }
-
-/*
- * create a fake course, tied to a fake user
- */
-
-function createFakeCourse( user ) {
-
-    // create course, attach to user
-    const courseName = faker.company.catchPhraseNoun() + " " + Math.ceil(Math.random() * 400);
-    const course = new CourseModel({
-        name: courseName,
-        user: user,
-        startDate: new Date(),
-        // hard-code end date for now (jan 1, 2020) --> month is 0-indexed
-        endDate: new Date( 20, 0 ),
-    });
-
-    return course;
-}
-
