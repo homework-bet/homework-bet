@@ -12,7 +12,7 @@ const dbName = settings.db_name_test || "homework-bet-test";
 const dbUrl = settings.db_host + dbName;
 
 describe('User Tests', function() {
-
+  
     before(function (done) {
         mongoose.connect(dbUrl);
         const db = mongoose.connection;
