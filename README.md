@@ -8,3 +8,11 @@
 1. Terminal: npm install
 1. Terminal: node populate_db.js (if desired)
 1. Terminal: npm start
+
+
+#To run on C9
+1. set up mongo https://community.c9.io/t/setting-up-mongodb/1717
+1. Use these in app_settings.json.
+    "port":    8080,
+    "ip": "0.0.0.0"
+
