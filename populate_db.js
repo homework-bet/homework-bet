@@ -33,13 +33,13 @@ function popDatabase() {
         }
     });
 
-    const course = new CourseModel( CourseFactory.random() ); 
+    const course = new CourseModel( CourseFactory.random( user ) ); 
     course.save(function (err, course) {
 
         if (err) {
             console.log(`error adding course: ${err}.`);
         } else {
-            console.log(`Course added: ${course.name}.`);
+            console.log(`Course added: ${course.name}, with user ${course.user.firstName} ${course.user.lastName}`);
         }
 
     });
