@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const poolSchema = mongoose.Schema({
-    startDate: Date,
-    endDate: Date,
+    startDate: {type: Date, required: true},
+    endDate: {type: Date, required: true},
     courses: [
         { type: Schema.Types.ObjectId, ref: 'Course' }
     ],
