@@ -16,13 +16,13 @@ body {
 hr {
   max-width: 50px;
   border-width: 3px;
-  border-color: #F05F40; }
+  border-color: #ffa654; }
 
 hr.light {
   border-color: #fff; }
 
 a {
-  color: #F05F40;
+  color: #ffa654;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   transition: all 0.2s; }
