@@ -1,7 +1,7 @@
 const express = require('express'),
       router  = express.Router(),
       session = require('express-session'),
-      User = require('../models/UserModel'),
+      UserModel = require('../models/UserModel'),
       settings = require('../app_settings'),
       userRoutes = require('./users'),
       courseRoutes = require('./courses'),
@@ -33,7 +33,7 @@ router.get('/register', function (req, res) {
 
 router.post('/register', function(req, res) {
 
-    var user = new User({
+    var user = new UserModel({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         password: req.body.password, 
@@ -67,7 +67,7 @@ router.get('/login', function (req, res) {
 router.post('/login', function(req, res, next) {
 
     // email should be unique
-    User.getAuthenticated( req.body.email, req.body.password, function(err, user, reason) {
+    UserModel.getAuthenticated( req.body.email, req.body.password, function(err, user, reason) {
         if(err) {
             res.render('login', {   appName: appName,
                                     pageTitle: "Login",
