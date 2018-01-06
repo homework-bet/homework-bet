@@ -126,7 +126,7 @@ router.get('/logout', (req, res) => {
 
 router.use('/users', userRoutes);
 router.use('/pools', poolRoutes);
-router.use('/courses', poolRoutes);
+router.use('/courses', courseRoutes);
 router.use('/payments', paymentRoutes);
 router.use('/verifications', verificationRoutes);
 
