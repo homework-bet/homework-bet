@@ -3,7 +3,6 @@ const express = require('express'),
       settings = require('../app_settings'),
       UserModel = require('../models/UserModel');
 
-
 router.get('/', function (req, res) {
     UserModel.find({}, function (err, users) {
         if (err) {
@@ -18,7 +17,6 @@ router.get('/', function (req, res) {
         }
     });
 });
-
 
 router.get('/new', function (req, res) {
     res.render('users/new', {
@@ -53,6 +51,5 @@ router.post('/', function (req, res) {
     });
 
 });
-
 
 module.exports = router;
