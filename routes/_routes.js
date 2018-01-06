@@ -9,6 +9,7 @@ const express = require('express'),
       verificationRoutes = require('./verifications'),
       poolRoutes = require('./pools'),
       bcrypt = require('bcryptjs');
+      authChecker = require('../helpers/authChecker');
 
 const appName = settings.app_name;
 
