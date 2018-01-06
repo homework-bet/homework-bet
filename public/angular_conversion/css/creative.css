@@ -197,11 +197,14 @@ header.masthead {
 
 #login {
   margin: auto;
-  width: 100%;
-  height: 100%;
-  background-color: red;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffa654;
 }
 
 #register {
-  
+  margin: auto;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffa654;  
 }
