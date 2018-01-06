@@ -25,11 +25,13 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded( {extended: false} ));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
     secret: settings.session_secret,
     saveUninitialized: false,
     resave: true,
 }));
+
 app.use(routes);
 
 app.listen(port, ip, function() {

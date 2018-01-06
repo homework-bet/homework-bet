@@ -1,0 +1,59 @@
+<% include ../_partials/header %>
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.min.css" />
+
+<div class="container">
+<form class="form-horizontal" action="/courses" method="POST">
+    <fieldset>
+
+        <!-- Form Name -->
+        <legend>Course Form</legend>
+
+        <!-- Select User -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="userId">User</label>
+            <div class="col-md-4">
+                <select id="userId" name="userId" class="form-control">
+                    <% users.forEach(function(user) { %>
+                        <option value="<%= user._id %>"><%= user.firstName + " " + user.lastName %></option>
+                    <% }); %>
+                </select>
+            </div>
+        </div>
+
+        <!-- courseName-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="course[name]">Course Name</label>
+            <div class="col-md-4">
+                <input id="courseName" name="course[name]" type="text" placeholder="Name" class="form-control input-md" required="">
+            </div>
+        </div>
+
+        <!-- startDate-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="course[startDate]">Start Date</label>
+            <div class="col-md-4">
+                <input id="startDate" name="course[startDate]" type="date" class="form-control input-md" required="">
+            </div>
+        </div>
+
+        <!-- endDate-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="course[endDate]">End Date</label>
+            <div class="col-md-4">
+                <input id="endDate" name="course[endDate]" type="date" class="form-control input-md" required="">
+            </div>
+        </div>
+    
+        <!-- Button -->
+        <div class="form-group">
+            <div class="col-md-4">
+                <button id="submit" name="submit" class="btn btn-primary">Add Course</button>
+            </div>
+        </div>
+
+    </fieldset>
+</form>
+</div>
+
+<% include ../_partials/footer %>
