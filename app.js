@@ -34,6 +34,7 @@ app.use(session({
 app.use(require('connect-flash')());
 app.use(function (req, res, next) {
     res.locals.messages = require('express-messages')(req, res);
+    res.locals.session = req.session
     if (req.session.user) {
         // TODO: handle case where coming from a logout page
         req.flash("info", "Current User: " + req.session.user.email);
