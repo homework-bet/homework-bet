@@ -6,11 +6,13 @@ const expect = chai.expect;
 const settings = require('../app_settings.json');
 
 const UserModel = require('../models/UserModel');
+const UserFactory = require('../factories/User')
+
 const dbName = settings.db_name_test || "homework-bet-test";
 const dbUrl = settings.db_host + dbName;
 
 describe('User Tests', function() {
-
+  
     before(function (done) {
         mongoose.connect(dbUrl);
         const db = mongoose.connection;
@@ -22,18 +24,36 @@ describe('User Tests', function() {
     }),
 
     it('New user saved to database', function(done) {
-        UserModel.create({
-            firstName: "Nathan",
-            lastName: "Perkins",
-        }, function(err, user) {
+        const userData = UserFactory.random();
+        UserModel.create(
+            userData, function(err, user) {
             if (err) {
                 console.log(err);
+                assert();
             } else {
-                assert.equal(user.firstName, "Nathan");
-                assert.equal(user.lastName, "Perkins");
+                assert.equal(user.firstName, userData.firstName);
+                assert.equal(user.lastName, userData.lastName);
+                assert.equal(user.email, userData.email);
+                assert.equal(user.password, userData.password);
                 done();
             }
         });
+    }),
+
+    it('User missing firstName, not saved.', function (done) {
+        const userData = UserFactory.random();
+        delete userData.firstName;
+
+        UserModel.create(
+            userData, function (err, user) {
+                if (err) {
+                    done();
+                } else {
+                    console.log("User created without firstName");
+                    assert();
+                }
+            }
+        );
     }),
 
     after(function (done) {
