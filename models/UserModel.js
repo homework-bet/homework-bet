@@ -5,7 +5,7 @@ const mongoose = require('mongoose'),
 
 const CourseModel = require('./CourseModel');
 
-const UserSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({
     firstName: {type: String, required: true, trim: true},
     lastName: {type: String, required: true, trim: true},
     email: {type: String, unique: true, required: true, trim: true},
@@ -17,7 +17,7 @@ const UserSchema = mongoose.Schema({
  * adapted from devsmash.com/blog/password-authentication-with-mongoose-and-bcrypt
  */
 
-UserSchema.pre('save', function(next) {
+userSchema.pre('save', function(next) {
     var user = this;
         
     if( !user.isModified('password') ) return next();
@@ -42,12 +42,12 @@ UserSchema.pre('save', function(next) {
 });
 
 
-var reasons = UserSchema.statics.failedLogin = {
+var reasons = userSchema.statics.failedLogin = {
     NOT_FOUND: 0,
     INVALID_PASS: 1
 };
 
-UserSchema.methods.comparePassword = function( candidate, callback ) {
+userSchema.methods.comparePassword = function( candidate, callback ) {
 
     // compare supplied password to stored password hash
     bcrypt.compare(candidate, this.password, function(err, isMatch) {
@@ -58,7 +58,7 @@ UserSchema.methods.comparePassword = function( candidate, callback ) {
     });
 };
 
-UserSchema.statics.getAuthenticated = function(email, pass, callback) {
+userSchema.statics.getAuthenticated = function(email, pass, callback) {
 
     // check if email exists in our database 
     this.findOne({email: email}, function(err, user) {
@@ -90,6 +90,6 @@ userSchema.methods.courses = function() {
     return CourseModel.find({ 'user': this });
 }
 
-const UserModel = mongoose.model('User', UserSchema);
+const UserModel = mongoose.model('User', userSchema);
 
 module.exports = UserModel;
