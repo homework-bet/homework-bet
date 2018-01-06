@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/homework-bet/homework-bet#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
     "ejs": "^2.5.7",
     "express": "^4.16.2",

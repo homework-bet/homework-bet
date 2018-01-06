@@ -3,6 +3,7 @@
 const express    = require('express');
 const app        = express();
 const bodyParser = require('body-parser');
+const session    = require('express-session');
 const settings   = require('./app_settings.json');
 const routes     = require('./routes/_routes');
 
@@ -21,9 +22,16 @@ const ip = settings.ip || "localhost";
 const appName = settings.app_name || "homework-bet-dev";
 
 app.set('view engine', 'ejs');
-app.use(express.static('public'))
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded( {extended: false} ));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({
+    secret: settings.session_secret,
+    saveUninitialized: false,
+    resave: true,
+}));
+
 app.use(routes);
 
 app.listen(port, ip, function() {
