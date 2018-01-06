@@ -194,8 +194,23 @@ header.masthead {
   .btn-primary:active, .btn-primary:focus {
     box-shadow: 0 0 0 0.2rem rgba(240, 95, 64, 0.5) !important; }
 
+.login {
+  width: 50%;
+  align-content: center;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 12px 12px 2px 1px rgba(0, 0, 0, .2);
+  padding: 25px;
+  /*border: 2px solid #f9c89a;*/
+}
 
 #login {
+  padding-top: 17%;
+  background-image: url("../img/header.jpg");
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   margin: auto;
   width: 100vw;
   height: 100vh;
