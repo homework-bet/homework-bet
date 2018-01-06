@@ -49,6 +49,8 @@ router.post('/register', function(req, res) {
                                      error: err.errmsg });
         }
         else {
+            req.session.user = user;
+            req.flash('success', req.session.user.email + ' logged in!');
             res.redirect('/');
         }
     });
@@ -84,6 +86,7 @@ router.post('/login', function(req, res, next) {
 
         else if (user) {
             req.session.user = user;
+            req.flash('success', req.session.user.email + ' logged in!');
             res.redirect('/');
 
             /*
