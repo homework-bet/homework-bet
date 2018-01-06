@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 app.use(session({
     secret: settings.session_secret,
     saveUninitialized: false,
-    resave: false,
+    resave: true,
 }));
 app.use(routes);
 
