@@ -24,18 +24,20 @@ router.get('/new', function (req, res) {
 });
 
 router.get('/:userId', function (req, res) {
-    UserModel.findById(req.params.userId, function(err, user) {
-        if (err) {
-            console.log(`User request error: ${err}`);
-            res.redirect(`/users`);
-        } else {
-            console.log(user);
-            res.render('users/show', {
-                user: user,
-                courses: [], // TODO: add courses
-                pageTitle: `${user.firstName} ${user.lastName}`,
-            })
-        }
+    let user = {};
+
+    UserModel.findById(req.params.userId).then(function(newUser) {
+        user = newUser;
+        return user.courses();
+    }).then(function (courses) {
+        res.render('users/show', {
+            user: user,
+            courses: courses,
+            pageTitle: `${user.firstName} ${user.lastName}`,
+        });
+    }).catch(function (err) {
+        console.log(`User request error: ${err}`);
+        res.redirect(`/users`);
     });
 });
 
