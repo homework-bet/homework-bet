@@ -16,6 +16,7 @@ router.get('/', function (req, res) {
     res.render('home', {
         appName: appName,
         pageTitle: 'Home',
+        currentUser: req.session.user,
     });
 });
 

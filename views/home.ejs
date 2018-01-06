@@ -1,5 +1,11 @@
 <% include ./_partials/header %>
 
+<% if (currentUser) { %>
+<div class="alert alert-primary" role="alert">
+    Logged in as <%= currentUser.email %>!
+</div>
+<% } %>
+
 <h1>Home Page</h1>
 
 <% include ./_partials/footer %>
