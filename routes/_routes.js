@@ -1,14 +1,14 @@
 const express = require('express'),
       router  = express.Router(),
       session = require('express-session'),
-      UserModel = require('../models/UserModel'),
+      User = require('../models/UserModel'),
       settings = require('../app_settings'),
       userRoutes = require('./users'),
       courseRoutes = require('./courses'),
       paymentRoutes = require('./payments'),
       verificationRoutes = require('./verifications'),
-      poolRoutes = require('./pools');
-//    bcrypt = require('bcryptjs'),
+      poolRoutes = require('./pools'),
+      bcrypt = require('bcryptjs');
 
 const appName = settings.app_name;
 
@@ -19,31 +19,43 @@ router.get('/', function (req, res) {
     });
 });
 
-router.get('/register', function (req, res) {
-    res.redirect('/users/new');
-});
-
-
 /*
+ * registration routes
+ */ 
+
+router.get('/register', function (req, res) {
+    res.render('register', {
+        appName: appName,
+        pageTitle: "Register",
+    });
+});
+ 
+
 router.post('/register', function(req, res) {
-    // note that we're using bcrypt here to hash our password
+
     var user = new User({
-        firstName = req.body.firstName,
-        lastName = req.body.lastName,
-        password = bcrypt.hashSync(req.body.password, 10), 
-        email = req.body.email,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        password: req.body.password, 
+        email: req.body.email,
     });
 
-    user.save( function(err, res) {
+    user.save( function(err, data) {
         if(err) {
-            console.log(err);
+            console.log(err.errmsg);
+            res.render('register', { appName: appName,
+                                     pageTitle: "Register",
+                                     error: err.errmsg });
+        }
+        else {
             res.redirect('/');
         }
     });
-
 });
-*/
 
+/*
+ * login routes
+ */ 
 
 router.get('/login', function (req, res) {
     res.render('login', {
@@ -55,50 +67,43 @@ router.get('/login', function (req, res) {
 router.post('/login', function(req, res, next) {
 
     // email should be unique
-    UserModel.findOne({email: req.body.email}, function(err, user) {
-
+    User.getAuthenticated( req.body.email, req.body.password, function(err, user, reason) {
         if(err) {
             res.render('login', {   appName: appName,
                                     pageTitle: "Login",
-                                    error: 'An error occurred.' } );
-
+                                    error: 'An error occurred.' });
             /*
             return res.status(500).json({
                 title: 'An error occurred.',
                 error: err
             });    
-            */
-        }
-        else if (!user) {
-            res.render('login', {   appName: appName,
-                                    pageTitle: "Login",
-                                    error: 'Invalid login credentials' });
-
-            /*
-            return res.status(401).json({
-                title: 'Login not successful.',
-                error: {message: 'Invalid login credentials'}
-            });
-            */
-        }
- //     else if( !(bcrypt.compareSync(req.body.password, user.password)) )
-        else if( !(req.body.password === user.password) ) {
-            res.render('login', {   appName: appName,
-                                    pageTitle: "Login",
-                                    error: 'Invalid login credentials' });
-
-            /*
-            return res.status(401).json({
-                title: 'Login not successful.',
-                error: {message: 'Invalid login credentials'}
-            });
+      
             */
         }
 
-        // otherwise, save session and redirect to main page 
-        else {
+        else if (user) {
             req.session.user = user;
-            res.redirect('/');            
+            res.redirect('/');
+
+            /*
+            return res.status(401).json({
+                title: 'Login not successful.',
+                error: {message: 'Invalid login credentials'}
+            });
+            */
+        }
+
+        // handle user not found / invalid pass. similarly
+        else {
+            res.render('login', {   appName: appName,
+                                    pageTitle: "Login",
+                                    error: 'Invalid login credentials' });
+            /*
+            return res.status(401).json({
+                title: 'Login not successful.',
+                error: {message: 'Invalid login credentials'}
+            });
+            */
         }
     });
 });

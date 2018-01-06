@@ -1,0 +1,29 @@
+<% include ./_partials/header %>
+
+    <h1>Register</h1>
+    <% if (typeof error != 'undefined' && error.length > 0) { %>
+        <p><%= error %></h2>
+    <% } %>
+    
+    <form method="post" action="/register">
+        <label>First Name:
+            <input type="text" name="firstName" size="25">
+        </label>
+
+        <label>Last Name:
+            <input type="text" name="lastName" size="25">
+        </label>
+
+        <label>Email:
+            <input type="text" name="email" size="25">
+        </label>
+
+        <label>Password: 
+            <input type="password" name="password" size="25">
+        </label> 
+
+        <input type="submit" value="Register">
+
+    </form>
+
+<% include ./_partials/footer %>
