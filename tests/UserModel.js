@@ -55,6 +55,84 @@ describe('User Tests', function() {
         );
     }),
 
+    it('User register with valid credentials', function(done) {
+        const userData = UserFactory.random();
+        newUser = new UserModel( userData );
+        newUser.save( function(err) {
+
+            UserModel.getAuthenticated( userData.email, userData.password, function(err, user, reason) {
+                if(err) {
+                    done();
+                } 
+                else if(user) {
+                    console.log("User registered and stored in database");
+                    assert.equal(user.firstName, userData.firstName);
+                    assert.equal(user.lastName, userData.lastName);
+                    assert.equal(user.email, userData.email);
+                    done();
+                }
+                else {
+                    var reason = UserModel.failedLogin;
+                    switch(reason) {
+                        case reasons.NOT_FOUND:
+                            console.log("User not found in database");
+                            done();
+                            break;
+                        case reasons.PASS_INCORRECT:
+                            console.log("User password not stored correctly");
+                            done();
+                            break;
+                    }
+                }
+            });
+
+        }); 
+    });
+
+/*
+    it('User registers with existing credentials', function(done) {
+        const userData = UserFactory.specified( 'foo', 'bar', 'foo@foo.com', 'secret' );
+        newUser = new UserModel( userData );
+        newUser.save( function(err) {
+
+            // now create a dup. user (same email)
+            userData.firstName = 'boo';
+            userData.lastName = 'mar'
+            dupUser = new UserModel( userData );
+
+            dupUser.save( function(err) {
+                
+                UserModel.getAuthenticated( userData.email, userData.password, function(err, user, reason) {
+                    if(err) {
+                        console.log("Duplicate User not registered.");
+                        done();
+                    } 
+                    else if(user) {
+                        console.log("Duplicate User registered and stored in database");
+                        assert(user.email !== newUser.email);
+                        done();
+                    }
+                    else {
+                    
+                        var reason = UserModel.failedLogin;
+                        switch(reason) {
+                            case reasons.NOT_FOUND:
+                                console.log("Duplicate user not found in database");
+                                done();
+                                break;
+                            case reasons.PASS_INCORRECT:
+                                console.log("Duplicate user password not stored correctly");
+                                done();
+                                break;
+                        }
+                    }
+                });
+
+            });
+        });
+    });
+*/
+
     after(function (done) {
         mongoose.connection.db.dropDatabase(function () {
             mongoose.connection.close(done);
