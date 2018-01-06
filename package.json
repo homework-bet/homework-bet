@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./node_modules/mocha/bin/mocha tests",
     "start": "nodemon app.js"
   },
   "repository": {
@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/homework-bet/homework-bet#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
@@ -36,6 +37,8 @@
     "passport-local-mongoose": "^4.4.0"
   },
   "devDependencies": {
-    "faker": "^4.1.0"
+    "chai": "^4.1.2",
+    "faker": "^4.1.0",
+    "mocha": "^4.1.0"
   }
 }
