@@ -26,26 +26,18 @@ describe('Course Model Tests', function () {
     }),
 
     it('Valid course saved to database', function (done) {
-        const userData = UserFactory.random()
-        const user = new UserModel(userData);
-        user.save(function (err, user) {
-            if (err) {
-                console.log(err);
-                assert();
-            }
-        });
+        const userData = UserFactory.random();
+        const courseData = CourseFactory.random({});
 
-        const courseData = CourseFactory.random(user);
-        const course = new CourseModel(courseData);
-
-        course.save(function(err, course) {
-            if (err) {
-                console.log(err);
-                assert();
-            } else {
-                assert.equal(course.name, courseData.name);
-                done();
-            }
+        UserModel.create(userData).then(function (user) {
+            courseData.user = user;
+            return CourseModel.create(courseData);
+        }).then(function (course) {
+            assert.equal(course.name, courseData.name);
+            done();
+        }).catch(function (err) {
+            console.log(err);
+            assert();
         });
     }),
 
@@ -53,13 +45,11 @@ describe('Course Model Tests', function () {
             const courseData = CourseFactory.random({});
             const course = new CourseModel(courseData);
 
-            course.save(function (err, course) {
-                if (err) {
-                    done();
-                } else {
-                    console.log("Course without user should not have saved.");
-                    assert();
-                }
+            CourseModel.create(courseData).then(function (course) {
+                console.log("Saved invalid course!");
+                assert();
+            }).catch(function (err) {
+                done();
             });
         }),
 

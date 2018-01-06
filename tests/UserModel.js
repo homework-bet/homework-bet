@@ -6,7 +6,7 @@ const expect = chai.expect;
 const settings = require('../app_settings.json');
 
 const UserModel = require('../models/UserModel');
-const UserFactory = require('../factories/User')
+const UserFactory = require('../factories/User');
 
 const dbName = settings.db_name_test || "homework-bet-test";
 const dbUrl = settings.db_host + dbName;
@@ -23,20 +23,18 @@ describe('User Tests', function() {
         });
     }),
 
-    it('New user saved to database', function(done) {
+    it('New user saved to database', function (done) {
         const userData = UserFactory.random();
-        UserModel.create(
-            userData, function(err, user) {
-            if (err) {
-                console.log(err);
-                assert();
-            } else {
-                assert.equal(user.firstName, userData.firstName);
-                assert.equal(user.lastName, userData.lastName);
-                assert.equal(user.email, userData.email);
-                assert.equal(user.password, userData.password);
-                done();
-            }
+
+        UserModel.create(userData).then(function (user) {
+            assert.equal(user.firstName, userData.firstName);
+            assert.equal(user.lastName, userData.lastName);
+            assert.equal(user.email, userData.email);
+            assert.equal(user.password, userData.password);
+            done();
+        }).catch(function (err) {
+            console.log(err);
+            assert();
         });
     }),
 
@@ -44,16 +42,12 @@ describe('User Tests', function() {
         const userData = UserFactory.random();
         delete userData.firstName;
 
-        UserModel.create(
-            userData, function (err, user) {
-                if (err) {
-                    done();
-                } else {
-                    console.log("User created without firstName");
-                    assert();
-                }
-            }
-        );
+        UserModel.create(userData).then(function (user) {
+            console.log("Shouldn't be able to save this user.");
+            assert();
+        }).catch(function(err) {
+            done();
+        });
     }),
 
     after(function (done) {

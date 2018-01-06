@@ -1,6 +1,7 @@
 // mongoose set up ============================================================
 const app = require('express')();
 const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 const settings = require('./app_settings.json');
 
 let db_name;
