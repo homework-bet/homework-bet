@@ -9,7 +9,6 @@ router.get('/', function (req, res) {
             console.log(`User request error: ${err}`);
             res.redirect(`/users`);
         } else {
-            console.log(users);
             res.render('users/index', {
                 users: users,
                 pageTitle: "Users",
