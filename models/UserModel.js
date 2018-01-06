@@ -3,14 +3,13 @@ const mongoose = require('mongoose'),
       Schema = mongoose.Schema,
       SALT_WORK_FACTOR = 10;
 
+const CourseModel = require('./CourseModel');
+
 const UserSchema = mongoose.Schema({
     firstName: {type: String, required: true, trim: true},
     lastName: {type: String, required: true, trim: true},
     email: {type: String, unique: true, required: true, trim: true},
     password: {type: String, required: true},
-    // courses: [
-    //     { type: Schema.Types.ObjectId, ref: 'Course' }
-    // ],
     created: {type: Date, default: Date.now, required: true},
 });
 
@@ -86,6 +85,10 @@ UserSchema.statics.getAuthenticated = function(email, pass, callback) {
         });
     });
 };
+
+userSchema.methods.courses = function() {
+    return CourseModel.find({ 'user': this });
+}
 
 const UserModel = mongoose.model('User', UserSchema);
 
