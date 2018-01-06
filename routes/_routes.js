@@ -113,6 +113,16 @@ router.post('/login', function(req, res, next) {
     });
 });
 
+router.get('/logout', (req, res) => {
+    if (req.session.user) {
+        const userEmail = req.session.user.email;
+        delete req.session.user; // TODO: detemine if it is safe to logout this way.
+        req.flash('success', userEmail + ' logged out.');
+    } else {
+        req.flash('warning', 'No user was logged in.');
+    }
+    res.redirect('/');
+});
 
 router.use('/users', userRoutes);
 router.use('/pools', poolRoutes);
