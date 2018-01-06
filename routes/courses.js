@@ -8,4 +8,10 @@ router.get('/', function (req, res) {
     });
 });
 
+router.get('/new', function (req, res) {
+    res.render('courses/new', {
+        pageTitle: 'New Course',
+    });
+})
+
 module.exports = router;
