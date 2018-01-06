@@ -4,9 +4,9 @@ const mongoose = require('mongoose'),
       SALT_WORK_FACTOR = 10;
 
 const UserSchema = mongoose.Schema({
-    firstName: {type: String, required: true},
-    lastName: {type: String, required: true},
-    email: {type: String, unique: true, required: true },
+    firstName: {type: String, required: true, trim: true},
+    lastName: {type: String, required: true, trim: true},
+    email: {type: String, unique: true, required: true, trim: true},
     password: {type: String, required: true},
     // courses: [
     //     { type: Schema.Types.ObjectId, ref: 'Course' }
