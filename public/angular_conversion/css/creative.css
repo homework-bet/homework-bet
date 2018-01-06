@@ -16,13 +16,13 @@ body {
 hr {
   max-width: 50px;
   border-width: 3px;
-  border-color: #F05F40; }
+  border-color: #ffa654; }
 
 hr.light {
   border-color: #fff; }
 
 a {
-  color: #F05F40;
+  color: #ffa654;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   transition: all 0.2s; }
@@ -194,8 +194,30 @@ header.masthead {
   .btn-primary:active, .btn-primary:focus {
     box-shadow: 0 0 0 0.2rem rgba(240, 95, 64, 0.5) !important; }
 
+.login {
+  width: 50%;
+  align-content: center;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 12px 12px 2px 1px rgba(0, 0, 0, .2);
+  padding: 25px;
+}
+
+.register {
+  width: 50%;
+  align-content: center;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 12px 12px 2px 1px rgba(0, 0, 0, .2);
+  padding: 25px;
+}
 
 #login {
+  padding-top: 17%;
+  background-image: url("../img/header.jpg");
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   margin: auto;
   width: 100vw;
   height: 100vh;
@@ -203,6 +225,13 @@ header.masthead {
 }
 
 #register {
+    padding-top: 17%;
+  background-image: url("../img/header.jpg");
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   margin: auto;
   width: 100vw;
   height: 100vh;
