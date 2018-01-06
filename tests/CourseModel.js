@@ -7,30 +7,33 @@ const settings = require('../app_settings.json');
 
 const UserModel = require('../models/UserModel');
 const UserFactory = require('../factories/User');
+const CourseModel = require('../models/CourseModel');
+const CourseFactory = require('../factories/Course');
 
 const dbName = settings.db_name_test || "homework-bet-test";
 const dbUrl = settings.db_host + dbName;
 
-describe('User Tests', function() {
-  
+describe('Course Model Tests', function () {
+
     before(function (done) {
         mongoose.connect(dbUrl);
         const db = mongoose.connection;
         db.on('error', console.error.bind(console, 'connection error'));
         db.once('open', function () {
-            console.log('mongoose: connected to '+ dbUrl);
+            console.log('mongoose: connected to ' + dbUrl);
             done();
         });
     }),
 
-    it('New user saved to database', function (done) {
+    it('Valid course saved to database', function (done) {
         const userData = UserFactory.random();
+        const courseData = CourseFactory.random({});
 
         UserModel.create(userData).then(function (user) {
-            assert.equal(user.firstName, userData.firstName);
-            assert.equal(user.lastName, userData.lastName);
-            assert.equal(user.email, userData.email);
-            assert.equal(user.password, userData.password);
+            courseData.user = user;
+            return CourseModel.create(courseData);
+        }).then(function (course) {
+            assert.equal(course.name, courseData.name);
             done();
         }).catch(function (err) {
             console.log(err);
@@ -38,17 +41,17 @@ describe('User Tests', function() {
         });
     }),
 
-    it('User missing firstName, not saved.', function (done) {
-        const userData = UserFactory.random();
-        delete userData.firstName;
+        it('Course with no user fails to save.', function (done) {
+            const courseData = CourseFactory.random({});
+            const course = new CourseModel(courseData);
 
-        UserModel.create(userData).then(function (user) {
-            console.log("Shouldn't be able to save this user.");
-            assert();
-        }).catch(function(err) {
-            done();
-        });
-    }),
+            CourseModel.create(courseData).then(function (course) {
+                console.log("Saved invalid course!");
+                assert();
+            }).catch(function (err) {
+                done();
+            });
+        }),
 
     after(function (done) {
         mongoose.connection.db.dropDatabase(function () {
@@ -56,4 +59,3 @@ describe('User Tests', function() {
         });
     })
 });
-
