@@ -34,7 +34,6 @@ describe('User Tests', function() {
                 assert.equal(user.firstName, userData.firstName);
                 assert.equal(user.lastName, userData.lastName);
                 assert.equal(user.email, userData.email);
-//                assert.equal(user.password, userData.password);
                 done();
             }
         });
