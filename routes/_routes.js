@@ -9,6 +9,7 @@ const express = require('express'),
       verificationRoutes = require('./verifications'),
       poolRoutes = require('./pools'),
       bcrypt = require('bcryptjs');
+      authChecker = require('../helpers/authChecker');
 
 const appName = settings.app_name;
 
@@ -49,6 +50,8 @@ router.post('/register', function(req, res) {
                                      error: err.errmsg });
         }
         else {
+            req.session.user = user;
+            req.flash('success', req.session.user.email + ' logged in!');
             res.redirect('/');
         }
     });
@@ -84,6 +87,7 @@ router.post('/login', function(req, res, next) {
 
         else if (user) {
             req.session.user = user;
+            req.flash('success', req.session.user.email + ' logged in!');
             res.redirect('/');
 
             /*
@@ -109,6 +113,16 @@ router.post('/login', function(req, res, next) {
     });
 });
 
+router.get('/logout', (req, res) => {
+    if (req.session.user) {
+        const userEmail = req.session.user.email;
+        delete req.session.user; // TODO: detemine if it is safe to logout this way.
+        req.flash('success', userEmail + ' logged out.');
+    } else {
+        req.flash('warning', 'No user was logged in.');
+    }
+    res.redirect('/');
+});
 
 router.use('/users', userRoutes);
 router.use('/pools', poolRoutes);

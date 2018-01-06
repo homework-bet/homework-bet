@@ -1,17 +1,17 @@
 // import modules =============================================================
 
-const express    = require('express');
-const app        = express();
-const bodyParser = require('body-parser');
-const session    = require('express-session');
-const settings   = require('./app_settings.json');
-const routes     = require('./routes/_routes');
+const express     = require('express');
+const app         = express();
+const bodyParser  = require('body-parser');
+const session     = require('express-session');
+const settings    = require('./app_settings.json');
+const routes      = require('./routes/_routes');
 
-const mongoose   = require('./mongoose_connect');
-const CourseModel = require('./models/CourseModel');
-const PaymentModel = require('./models/PaymentModel');
-const PoolModel = require('./models/PoolModel');
-const UserModel = require('./models/UserModel');
+const mongoose          = require('./mongoose_connect');
+const CourseModel       = require('./models/CourseModel');
+const PaymentModel      = require('./models/PaymentModel');
+const PoolModel         = require('./models/PoolModel');
+const UserModel         = require('./models/UserModel');
 const VerificationModel = require('./models/VerificationModel');
 
 
@@ -31,6 +31,17 @@ app.use(session({
     saveUninitialized: false,
     resave: true,
 }));
+
+app.use(require('connect-flash')());
+app.use(function (req, res, next) {
+    res.locals.messages = require('express-messages')(req, res);
+    res.locals.session = req.session
+    if (req.session.user) {
+        // TODO: handle case where coming from a logout page
+        req.flash("info", "Current User: " + req.session.user.email);
+    }
+    next();
+});
 
 app.use(routes);
 

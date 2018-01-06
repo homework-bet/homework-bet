@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const CourseSchema = Schema({
+const courseSchema = Schema({
     name: { type: String, required: true },
     user: { type: Schema.Types.ObjectId, ref: 'User' },
     pool: { type: Schema.Types.ObjectId, ref: 'Pool' },
@@ -19,7 +19,7 @@ const CourseSchema = Schema({
  */
 
 /*
-CourseSchema.pre('save', function() {
+courseSchema.pre('save', function() {
     
     console.log("pre-save validation...");
 
@@ -35,5 +35,5 @@ CourseSchema.pre('save', function() {
 });
 */
 
-const CourseModel = mongoose.model('Course', CourseSchema);
+const CourseModel = mongoose.model('Course', courseSchema);
 module.exports = CourseModel;
