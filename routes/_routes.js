@@ -71,8 +71,6 @@ router.post('/api/register', function(req, res) {
         email: req.body.email,
     });
     
-    console.log(user);
-
     user.save( function(err, data) {
         if(err) {
             console.log(err.errmsg);
@@ -119,26 +117,12 @@ router.post('/login', function(req, res, next) {
             res.render('login', {   appName: appName,
                                     pageTitle: "Login",
                                     error: 'An error occurred.' });
-            /*
-            return res.status(500).json({
-                title: 'An error occurred.',
-                error: err
-            });    
-      
-            */
         }
 
         else if (user) {
             req.session.user = user;
             req.flash('success', req.session.user.email + ' logged in!');
             res.redirect('/');
-
-            /*
-            return res.status(401).json({
-                title: 'Login not successful.',
-                error: {message: 'Invalid login credentials'}
-            });
-            */
         }
 
         // handle user not found / invalid pass. similarly
@@ -146,12 +130,6 @@ router.post('/login', function(req, res, next) {
             res.render('login', {   appName: appName,
                                     pageTitle: "Login",
                                     error: 'Invalid login credentials' });
-            /*
-            return res.status(401).json({
-                title: 'Login not successful.',
-                error: {message: 'Invalid login credentials'}
-            });
-            */
         }
     });
 });
@@ -159,7 +137,6 @@ router.post('/login', function(req, res, next) {
 router.post('/api/login', function(req, res, next) {
 
     // email should be unique
-    console.log('req.body.email:', req.body.email, 'req.body.password:', req.body.password);
     UserModel.getAuthenticated( req.body.email, req.body.password, function(err, user, reason) {
         if(err) {
             res.json({  
