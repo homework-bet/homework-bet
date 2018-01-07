@@ -97,6 +97,14 @@ myApp.controller('addCourseController', ['$scope', '$http', '$log',
     };
   }
 ]);
+// // anchorController
+// myApp.controller('anchorController', function($scope, $location, $anchorScroll) {
+//   $scope.scrollTo = function(id) {
+//       $location.hash(id);
+//       $anchorScroll();
+//   }
+// });
+
 
 // campaignController
 myApp.controller('campaignController', ['$scope', '$http', '$log', 
