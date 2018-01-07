@@ -18,22 +18,15 @@ const courseSchema = Schema({
  * pre-save error checker
  */
 
-/*
-courseSchema.pre('save', function() {
+courseSchema.pre('save', function(next) {
     
-    console.log("pre-save validation...");
-
     if( this.startDate > this.endDate ) {
-
         console.log("course date mismatch found");
-        next( new Error('Course end date must be greater than course start date!'));
+        next( new Error('Course end date must be greater than course start date!') );
         return;
     }
-
     next();
-
 });
-*/
 
 const CourseModel = mongoose.model('Course', courseSchema);
 module.exports = CourseModel;

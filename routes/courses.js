@@ -24,16 +24,15 @@ router.get('/new', function (req, res) {
 });
 
 router.post('/', (req, res) => {
-    UserModel.findById(req.body.userId)
+    UserModel.findById(req.body.userId).exec()
     .then(user => {
         const courseData = req.body.course;
-        courseData.user = user
+        courseData.user = user;
         return CourseModel.create(courseData);
     }).then(course => {
         res.redirect('/users/' + String(course.user._id));
     }).catch(err => {
         console.log(err);
-        res.redirect('/courses/new');
     });
 });
 
