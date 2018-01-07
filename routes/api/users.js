@@ -25,6 +25,33 @@ router.get('/', (req, res) => {
         });
 });
 
+router.get('/current', (req, res) => {
+    const pageTitle = "User Profile";
+    const currentUser = req.session.user;
+
+    if (!currentUser) {
+        // no logged in user
+        res.json({
+            pageTitle: pageTitle,
+            error: "No user logged in.",
+        });
+    } else {
+        // find the user and present the info
+        UserModel.findById(currentUser._id, '-password').then(user => {
+            res.json({
+                user: user,
+                pageTitle: `${user.firstName} ${user.lastName}`,
+            });
+        }).catch(err => {
+            console.log(`User request error: ${err}`);
+            res.json({
+                pageTitle: pageTitle,
+                error: errmsg,
+            });
+        });
+    }
+});
+
 router.get('/:userId', (req, res) => {
     const currentUser = req.session.user;
     const requestUserId = req.params.userId;
