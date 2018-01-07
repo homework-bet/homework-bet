@@ -21,6 +21,10 @@ myApp.config(['$routeProvider', function($routeProvider) {
     .when('/contact', {
       templateUrl: 'partials/contact.html'
     })
+    .when('/join-campaign', {
+      templateUrl: 'partials/join-campaign.html',
+      controller: 'registerController'
+    })
     .when('/login', {
       templateUrl: 'partials/login.html',
       controller: 'loginController'
@@ -31,10 +35,6 @@ myApp.config(['$routeProvider', function($routeProvider) {
     })
     .when('/register', {
       templateUrl: 'partials/register.html',
-      controller: 'registerController'
-    })
-    .when('/join-campaign', {
-      templateUrl: 'partials/join-campaign.html',
       controller: 'registerController'
     })
     .otherwise({
@@ -54,6 +54,14 @@ myApp.controller('routeController', ['$scope', function($scope) {
     contact: 'partials/contact.html'
   }  
 }]);
+
+// // anchorController
+// myApp.controller('anchorController', function($scope, $location, $anchorScroll) {
+//   $scope.scrollTo = function(id) {
+//       $location.hash(id);
+//       $anchorScroll();
+//   }
+// });
 
 // campaignController
 myApp.controller('campaignController', ['$scope', '$http', '$log', 

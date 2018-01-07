@@ -7,7 +7,7 @@
         </div>
         
         
-        <form ng-submit="registerUser()">
+        <form ng-submit="addCourse()">
             <h2>Add a Course</h2>  
             <fieldset>  
             <!-- Text input-->
@@ -15,7 +15,7 @@
               <label class="col-md-12 control-label" for="courseTitle">Course Title</label>  
               <div class="col-md-12">
               <input id="courseTitle" name="courseTitle" type="text" placeholder="Basketweaving 101" 
-                class="form-control input-md" required="" ng-model="user.email" autofocus>
+                class="form-control input-md" required="" ng-model="course.email" autofocus>
                 
               </div>
             </div>
@@ -24,7 +24,7 @@
             <div class="form-group">
               <label class="col-md-12 control-label" for="termStart">Term Start</label>  
               <div class="col-md-12">
-                  <input id="termStart" name="termStart" type="date" class="form-control input-md" ng-model="user.firstName">
+                  <input id="termStart" name="termStart" type="date" class="form-control input-md" ng-model="course.firstName">
               </div>
             </div>
           
@@ -32,7 +32,7 @@
             <div class="form-group">
               <label class="col-md-12 control-label" for="termEnd">Term End</label>  
               <div class="col-md-12">
-                  <input id="termEnd" name="termEnd" type="date" class="form-control input-md" ng-model="user.firstName">
+                  <input id="termEnd" name="termEnd" type="date" class="form-control input-md" ng-model="course.firstName">
               </div>
             </div>
          
