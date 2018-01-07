@@ -38,11 +38,12 @@ myApp.config(['$routeProvider', function($routeProvider) {
     });
 }]);
 
-myApp.run(function($rootScope, $window) {
-    if ($window.localStorage.user) {
-      $rootScope.currentUser = JSON.parse($window.localStorage.user);
-    }
-});
+// from boilerplate, unsure it even did anything
+// myApp.run(function($rootScope, $window) {
+//     if ($window.localStorage.user) {
+//       $rootScope.currentUser = JSON.parse($window.localStorage.user);
+//     }
+// });
 
 myApp.controller('pageController', ['$scope', '$log', function($scope, $log) {
   $log.log($scope);
@@ -66,16 +67,46 @@ myApp.controller('campaignController', ['$scope', '$log', function($scope, $log)
 // loginController
 myApp.controller('loginController', ['$scope', '$http', '$log', function($scope, $http, $log) {
   $log.log($scope);
-  $log.log('loginController is not yet set up.');
-      $scope.data = [];
-  var request = $http.get('/register');    
+  $log.log('loginController is not yet fully set up.');
+  $scope.data = {};
+  $scope.email = null;
+  $scope.password = null;
+
+  var request = $http.get('/api/login');    
   request.success(function(data) {
-      $scope.data = data;
+      $scope.loginFormData = data;
+      console.log(data);
+      console.log("SUCCESSFULLY GOT THE LOGIN PAGE STUFF!");
   });
   request.error(function(data){
       console.log('Error: ' + data);
   });
-  $log.log($scope.data);
+
+
+  // needs http post request, rewriting /login express route as /api/login
+  $scope.loginUser = function (email, password) {
+    // set up data to post
+    var data = {
+      email: email,
+      password: password
+    };
+
+    // set up request
+    var request = $http.post('/api/login');
+    $http.post('/api/login', JSON.stringify(data)).then(function (response) {
+      if (response.data) {
+        $scope.msg = "Post Data Submitted Successfully!";
+        console.log($scope.msg);
+        $scope.loginResponse = response.data;
+        console.log($scope.loginResponse);
+      }
+    }, function (response) {
+      $scope.msg = "Service not Exists";
+      $scope.statusval = response.status;
+      $scope.statustext = response.statusText;
+      $scope.headers = response.headers();
+    });
+  };
 }]);
 
 // profileController
