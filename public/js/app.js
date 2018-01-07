@@ -33,6 +33,10 @@ myApp.config(['$routeProvider', function($routeProvider) {
       templateUrl: 'partials/register.html',
       controller: 'registerController'
     })
+    .when('/join-campaign', {
+      templateUrl: 'partials/join-campaign.html',
+      controller: 'registerController'
+    })
     .otherwise({
       templateUrl: 'partials/404.html'
     });
