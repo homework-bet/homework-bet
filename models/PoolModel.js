@@ -8,7 +8,7 @@ const poolSchema = mongoose.Schema({
         { type: Schema.Types.ObjectId, ref: 'Course' }
     ],
     transactions: [
-        { type: Schema.Types.ObjectId, ref: 'Transactions' }
+        { type: Schema.Types.ObjectId, ref: 'Transaction' }
     ],
     created: { type: Date, default: Date.now },
 });

@@ -66,25 +66,32 @@ router.post('/register', function(req, res) {
 });
 
 router.post('/api/register', function(req, res) {
-
+    
     var user = new UserModel({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         password: req.body.password, 
         email: req.body.email,
     });
+    
+    console.log(user);
 
     user.save( function(err, data) {
         if(err) {
             console.log(err.errmsg);
-            res.render('register', { appName: appName,
-                                     pageTitle: "Register",
-                                     error: err.errmsg });
+            res.json({ 
+                appName: appName,
+                pageTitle: "Register",
+                error: err.errmsg 
+            });
         }
         else {
             req.session.user = user;
-            req.flash('success', req.session.user.email + ' logged in!');
-            res.redirect('/');
+            res.json({
+                appName: appName,
+                pageTitle: "Register",
+                message: 'success,' + req.session.user.email + ' logged in!'                 
+            });
         }
     });
 });
@@ -172,8 +179,6 @@ router.post('/api/login', function(req, res, next) {
                 pageTitle: "Login",
                 message: 'success,' + req.session.user.email + ' logged in!' 
             });
-            // req.flash('success', req.session.user.email + ' logged in!');
-            // res.redirect('/');
         }
 
         // handle user not found / invalid pass. similarly
