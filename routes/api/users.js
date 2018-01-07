@@ -29,8 +29,6 @@ router.get('/:userId', (req, res) => {
     const currentUser = req.session.user;
     const requestUserId = req.params.userId;
 
-    console.log(currentUser);
-    console.log(requestUserId);
     const pageTitle = "User Profile";
     
     if (!currentUser) {
