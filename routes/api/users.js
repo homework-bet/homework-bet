@@ -47,7 +47,7 @@ router.get('/current', (req, res) => {
         }).catch(err => {
             console.log(`User request error: ${err}`);
             res.json({
-                error: errmsg,
+                error: err.errmsg,
             });
         });
     }
