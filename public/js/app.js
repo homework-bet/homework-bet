@@ -38,13 +38,6 @@ myApp.config(['$routeProvider', function($routeProvider) {
     });
 }]);
 
-// from boilerplate, unsure it even did anything
-// myApp.run(function($rootScope, $window) {
-//     if ($window.localStorage.user) {
-//       $rootScope.currentUser = JSON.parse($window.localStorage.user);
-//     }
-// });
-
 myApp.controller('pageController', ['$scope', '$log', function($scope, $log) {
   $log.log($scope);
 }]);
@@ -102,7 +95,8 @@ myApp.controller('loginController', ['$scope', '$http', '$location', '$log',
           // from here, we need to validate the response to determine where to go
           if($scope.loginResponse.error) {
             // TODO fix - this error passing is not correct syntax
-            $location.path('/404', {error: $scope.loginResponse.error});
+            //$location.path('/404', {error: $scope.loginResponse.error});
+            $location.path('/404');
           } else {
             $location.path('/profile');
           }
@@ -142,7 +136,8 @@ myApp.controller('registerController', ['$scope', '$http', '$location',
           // from here, we need to validate the response to determine where to go
           if($scope.registerResponse.error) {
             // TODO fix - this error passing is not correct syntax
-            $location.path('/404', {error: $scope.registerResponse.error});
+            //$location.path('/404', {error: $scope.registerResponse.error});
+            $location.path('/404');
           } else {
             $location.path('/profile');
           }

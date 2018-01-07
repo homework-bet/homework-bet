@@ -92,8 +92,6 @@ router.post('/api/register', function(req, res) {
                 pageTitle: "Register",
                 message: 'success,' + req.session.user.email + ' logged in!'                 
             });
-            // req.flash('success', req.session.user.email + ' logged in!');
-            // res.redirect('/');
         }
     });
 });
@@ -181,8 +179,6 @@ router.post('/api/login', function(req, res, next) {
                 pageTitle: "Login",
                 message: 'success,' + req.session.user.email + ' logged in!' 
             });
-            // req.flash('success', req.session.user.email + ' logged in!');
-            // res.redirect('/');
         }
 
         // handle user not found / invalid pass. similarly
