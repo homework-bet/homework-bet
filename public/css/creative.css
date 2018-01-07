@@ -202,8 +202,17 @@ header.masthead {
   padding: 25px;
 }
 
-#userForms {
-  padding-top: 16%;
+.campaigns {
+  width: 80%;
+  height: 100%;
+  align-content: center;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 12px 12px 2px 1px rgba(0, 0, 0, .2);
+  padding: 25px;
+}
+
+.pages {
+  padding-top: 10%;
   background-image: url("../img/header.jpg");
   background-position: center center;
   -webkit-background-size: cover;

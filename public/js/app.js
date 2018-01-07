@@ -26,6 +26,10 @@ myApp.config(['$routeProvider', function($routeProvider) {
     .when('/contact', {
       templateUrl: 'partials/contact.html',
       controller: 'pageController'
+    })
+    .when('/campaigns', {
+      templateUrl: 'partials/campaigns.html',
+      controller: 'pageController'
     });
 }]);
 
