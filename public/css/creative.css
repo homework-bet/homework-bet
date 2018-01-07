@@ -215,3 +215,8 @@ header.masthead {
   height: 100vh;
   background-color: #ffa654;
 }
+
+.userForm  h2, .userForm legend {
+  text-align: center;
+  color: #17a2b8;
+}
