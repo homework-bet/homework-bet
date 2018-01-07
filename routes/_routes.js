@@ -1,15 +1,16 @@
 const express = require('express'),
-      router  = express.Router(),
-      session = require('express-session'),
-      UserModel = require('../models/UserModel'),
-      settings = require('../app_settings'),
-      userRoutes = require('./users'),
-      courseRoutes = require('./courses'),
-      paymentRoutes = require('./payments'),
-      verificationRoutes = require('./verifications'),
-      poolRoutes = require('./pools'),
-      bcrypt = require('bcryptjs');
-      authChecker = require('../helpers/authChecker');
+    router  = express.Router(),
+    session = require('express-session'),
+    UserModel = require('../models/UserModel'),
+    settings = require('../app_settings'),
+    userRoutes = require('./users'),
+    courseRoutes = require('./courses'),
+    paymentRoutes = require('./payments'),
+    verificationRoutes = require('./verifications'),
+    poolRoutes = require('./pools'),
+    apiRoutes = require('./_api'),
+    bcrypt = require('bcryptjs');
+    authChecker = require('../helpers/authChecker');
 
 const appName = settings.app_name;
 
@@ -200,6 +201,7 @@ router.get('/logout', (req, res) => {
     res.redirect('/');
 });
 
+router.use('/api', apiRoutes);
 router.use('/users', userRoutes);
 router.use('/pools', poolRoutes);
 router.use('/courses', courseRoutes);
