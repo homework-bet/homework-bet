@@ -24,7 +24,7 @@ router.get('/new', function (req, res) {
 });
 
 router.post('/', (req, res) => {
-    UserModel.findById(req.body.userId).exec()
+    UserModel.findById(req.body.userId)
     .then(user => {
         const courseData = req.body.course;
         courseData.user = user;
@@ -33,7 +33,7 @@ router.post('/', (req, res) => {
         res.redirect('/users/' + String(course.user._id));
     }).catch(err => {
         console.log(err);
-        res.redirect('courses/new');
+        res.redirect('/courses/new');
     });
 });
 
