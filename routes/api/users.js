@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 
     UserModel.find({}, '-password')
         // find and present all users
-        .then((users) => {
+        .then(users => {
             res.json({
                 pageTitle: pageTitle,
                 users: users,
@@ -27,8 +27,11 @@ router.get('/', (req, res) => {
 
 router.get('/:userId', (req, res) => {
     const currentUser = req.session.user;
+    const requestUserId = req.params.userId;
+
+    console.log(currentUser);
+    console.log(requestUserId);
     const pageTitle = "User Profile";
-    let user = {};
     
     if (!currentUser) {
         // no logged in user
@@ -36,18 +39,14 @@ router.get('/:userId', (req, res) => {
             pageTitle: pageTitle,
             error: "No user logged in.",
         });
-    } else if (req.params.userId === req.session.user._id) {
+    } else if(requestUserId === currentUser._id) {
         // find the user and present the info
-        UserModel.findById(req.params.userId, '-password').then(function (foundUser) {
-            user = foundUser;
-            return user.courses();
-        }).then(function (courses) {
+        UserModel.findById(req.params.userId, '-password').then(user => {
             res.json({
                 user: user,
-                courses: courses,
                 pageTitle: `${user.firstName} ${user.lastName}`,
             });
-        }).catch(function (err) {
+        }).catch(err => {
             console.log(`User request error: ${err}`);
             res.json({
                 pageTitle: pageTitle,
