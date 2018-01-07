@@ -9,18 +9,6 @@
         <!-- Form Name -->
         <legend>Course Form</legend>
 
-        <!-- Select User -->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="userId">User</label>
-            <div class="col-md-4">
-                <select id="userId" name="userId" class="form-control">
-                    <% users.forEach(function(user) { %>
-                        <option value="<%= user._id %>"><%= user.firstName + " " + user.lastName %></option>
-                    <% }); %>
-                </select>
-            </div>
-        </div>
-
         <!-- courseName-->
         <div class="form-group">
             <label class="col-md-4 control-label" for="course[name]">Course Name</label>
@@ -51,9 +39,7 @@
                 <button id="submit" name="submit" class="btn btn-primary">Add Course</button>
             </div>
         </div>
-
     </fieldset>
 </form>
 </div>
-
 <% include ../_partials/footer %>
