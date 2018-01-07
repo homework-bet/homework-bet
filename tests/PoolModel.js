@@ -13,7 +13,7 @@ const CourseFactory = require('../factories/Course');
 const PoolModel = require('../models/PoolModel');
 const PoolFactory = require('../factories/Pool');
 
-const dbName = settings.db_name_test || "homework-bet-test";
+const dbName = settings.db_name_test;
 const dbUrl = settings.db_host + dbName;
 
 describe('Pool Model Tests', function () {
