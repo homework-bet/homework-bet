@@ -4,27 +4,30 @@ const express = require('express'),
 
 const UserModel = require('../models/UserModel');
 const CourseModel = require('../models/CourseModel');
+const authChecker = require('../helpers/authChecker');
 
-router.get('/', function (req, res) {
+// TODO: this should maybe be locked down to admins only.
+router.get('/', authChecker, function (req, res) {
+
     res.render('courses/index', {
         pageTitle: 'Courses',
     });
 });
 
-router.get('/new', function (req, res) {
-    UserModel.find({})
-    .then(users => {
+router.get('/new', authChecker, function (req, res) {
+    UserModel.findById(req.session.user._id)
+    .then(user => {
         res.render('courses/new', {
             pageTitle: 'New Course',
-            users: users,
+            user: user,
         });
     }).catch(err => {
         console.log(err);
     });
 });
 
-router.post('/', (req, res) => {
-    UserModel.findById(req.body.userId)
+router.post('/', authChecker, (req, res) => {
+    UserModel.findById(req.session.user._id)
     .then(user => {
         const courseData = req.body.course;
         courseData.user = user;
