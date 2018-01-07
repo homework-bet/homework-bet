@@ -45,6 +45,14 @@ h6 {
 
 .text-faded {
   color: rgba(255, 255, 255, 0.7); }
+  
+.awesomeOrange {
+  color: #ffa654;
+}
+
+.tealDream {
+  color: #17a2b8;
+}
 
 section {
   padding: 8rem 0; }
@@ -193,6 +201,10 @@ header.masthead {
     background-color: #ee4b28 !important; }
   .btn-primary:active, .btn-primary:focus {
     box-shadow: 0 0 0 0.2rem rgba(240, 95, 64, 0.5) !important; }
+    
+.centerText {
+  text-align: center;
+}
 
 .userForm {
   width: 50%;
@@ -209,12 +221,17 @@ header.masthead {
 
 .campaigns {
   width: 80%;
-  height: 100%;
+  /*height: 100%;*/
   align-content: center;
   background: rgba(255, 255, 255, 0.85);
   box-shadow: 12px 12px 2px 1px rgba(0, 0, 0, .2);
   padding: 25px;
 }
+
+.campaignStatus {
+  padding-left: 10px;
+}
+
 
 .profile {
   width: 80%;
@@ -225,9 +242,7 @@ header.masthead {
   padding: 25px;
 }
 
-.profile h2 {
-  
-}
+
 
 .section-title {
   text-align: center;
@@ -237,6 +252,7 @@ header.masthead {
 .sub-section-title {
   color: #17a2b8; 
 }
+
 .pages {
   padding-top: 10%;
   background-image: url("../img/header.jpg");
