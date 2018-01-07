@@ -6,6 +6,7 @@ const UserModel = require('../models/UserModel');
 const CourseModel = require('../models/CourseModel');
 const authChecker = require('../helpers/authChecker');
 
+// TODO: this should maybe be locked down to admins only.
 router.get('/', authChecker, function (req, res) {
 
     res.render('courses/index', {
@@ -15,7 +16,7 @@ router.get('/', authChecker, function (req, res) {
 
 router.get('/new', authChecker, function (req, res) {
     UserModel.findById(req.session.user._id)
-    .then(users => {
+    .then(user => {
         res.render('courses/new', {
             pageTitle: 'New Course',
             user: user,
@@ -26,7 +27,7 @@ router.get('/new', authChecker, function (req, res) {
 });
 
 router.post('/', authChecker, (req, res) => {
-    UserModel.findById(req.body.userId)
+    UserModel.findById(req.session.user._id)
     .then(user => {
         const courseData = req.body.course;
         courseData.user = user;
