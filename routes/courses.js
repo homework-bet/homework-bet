@@ -33,6 +33,7 @@ router.post('/', (req, res) => {
         res.redirect('/users/' + String(course.user._id));
     }).catch(err => {
         console.log(err);
+        res.redirect('courses/new');
     });
 });
 
