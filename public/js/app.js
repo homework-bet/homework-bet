@@ -21,6 +21,10 @@ myApp.config(['$routeProvider', function($routeProvider) {
     .when('/contact', {
       templateUrl: 'partials/contact.html'
     })
+    .when('/join-campaign', {
+      templateUrl: 'partials/join-campaign.html',
+      controller: 'addCourseController'
+    })
     .when('/login', {
       templateUrl: 'partials/login.html',
       controller: 'loginController'
@@ -33,20 +37,16 @@ myApp.config(['$routeProvider', function($routeProvider) {
       templateUrl: 'partials/register.html',
       controller: 'registerController'
     })
-    .when('/join-campaign', {
-      templateUrl: 'partials/join-campaign.html',
-      controller: 'registerController'
-    })
     .otherwise({
       templateUrl: 'partials/404.html'
     });
 }]);
 
-myApp.controller('pageController', ['$scope', '$log', function($scope, $log) {
-  $log.log($scope);
-}]);
+// myApp.controller('pageController', ['$scope', '$log', function($scope, $log) {
+//   $log.log($scope);
+// }]);
 
-
+// for the home page
 myApp.controller('routeController', ['$scope', function($scope) {
   $scope.template = {
     banner: 'partials/banner.html',
@@ -54,6 +54,49 @@ myApp.controller('routeController', ['$scope', function($scope) {
     contact: 'partials/contact.html'
   }  
 }]);
+
+// addCourseController is for partials/join-campaign.html
+myApp.controller('addCourseController', ['$scope', '$http', '$log', 
+  function($scope, $http, $log) {
+    $log.log($scope);
+    $log.log('addCourseController is not yet set up.');
+    // this should be set up similar to register, but for adding
+    // a course, if the api is ready. GET request should not be
+    // needed but POST would.
+    $scope.newCourse = {};
+    
+    $scope.addCourse = function() {
+      console.log($scope.newCourse); //TODO remove after testing
+      var data = {
+        name:       $scope.user.firstName,
+        startDate:  $scope.user.startDate,
+        endDate:    $scope.user.endDate
+      };
+      // set up request
+      $http.post('/api/courses/new', JSON.stringify(data)).then(function (response) {
+        if (response.data) {
+          $scope.msg = "Post Register Data Submitted Successfully!";
+          console.log($scope.msg);
+          $scope.response.newCourse = response.data;
+          console.log($scope.response.newCourse);
+          // from here, we need to validate the response to determine where to go
+          if($scope.response.newCourse.error) {
+            // TODO fix - this error passing is not correct syntax
+            //$location.path('/404', {error: $scope.registerResponse.error});
+            $location.path('/404');
+          } else {
+            $location.path('/profile'); //TODO update to correct link
+          }
+        }
+      }, function (response) {
+        $scope.msg = "Service not Exists";
+        $scope.statusval = response.status;
+        $scope.statustext = response.statusText;
+        $scope.headers = response.headers();
+      });
+    };
+  }
+]);
 
 // campaignController
 myApp.controller('campaignController', ['$scope', '$http', '$log', 
@@ -67,10 +110,10 @@ myApp.controller('campaignController', ['$scope', '$http', '$log',
   }
 ]);
 
+
 // loginController is for partials/login.html
 myApp.controller('loginController', ['$scope', '$http', '$location', '$log', 
   function($scope, $http, $location, $log) {
-    $log.log($scope);
     $log.log('loginController is not yet fully set up.');
     $scope.data = {};
     $scope.user = {};
@@ -88,7 +131,7 @@ myApp.controller('loginController', ['$scope', '$http', '$location', '$log',
   
     // needs http post request, rewriting /login express route as /api/login
     $scope.loginUser = function () {
-      console.log($scope.user);
+      // console.log($scope.user); //TODO remove after testing
       // set up data to post
       var data = {
         email:    $scope.user.email,
@@ -142,7 +185,7 @@ myApp.controller('registerController', ['$scope', '$http', '$location',
 
     var request = $http.get('/api/register');    
     request.success(function(data) {
-        $scope.registerFormData = data;
+        //$scope.registerFormData = data; //TODO remove after testing
         console.log(data);
         console.log("SUCCESSFULLY GOT THE REGISTER PAGE STUFF!");
     });
@@ -153,11 +196,11 @@ myApp.controller('registerController', ['$scope', '$http', '$location',
 
     $scope.registerUser = function() {
       console.log($scope.user);
-        var data = {
-          firstName:  $scope.user.firstName,
-          lastName:   $scope.user.lastName,
-          password:   $scope.user.password, 
-          email:      $scope.user.email
+      var data = {
+        firstName:  $scope.user.firstName,
+        lastName:   $scope.user.lastName,
+        password:   $scope.user.password, 
+        email:      $scope.user.email
       };
       // set up request
       $http.post('/api/register', JSON.stringify(data)).then(function (response) {
