@@ -26,7 +26,7 @@ describe('Pool Model Tests', function () {
             console.log('mongoose: connected to ' + dbUrl);
             done();
         });
-    }),
+    })
 
     it('should save a valid pool to the database.', () => {
         const poolData = PoolFactory.random();
@@ -36,7 +36,7 @@ describe('Pool Model Tests', function () {
             assert.equal(Date(pool.startDate), Date(poolData.startDate));
             assert.equal(Date(pool.endDate), Date(pool.endDate));
         });
-    });
+    })
 
     it('should hold a course.', () => {
         const userData = UserFactory.random();
@@ -60,8 +60,22 @@ describe('Pool Model Tests', function () {
             assert.equal(course.startDate, courseData.startDate);
             assert.equal(course.endDate, courseData.endDate);
         });
+    })
 
-    });
+    it('should work with PoolFactory.generateYear()', () => {
+        poolDataArray = PoolFactory.generateYear(2018)
+        const promises = poolDataArray.map(poolData => PoolModel.create(poolData))
+
+        return Promise.all(promises).then(pools => {
+            assert(pools.length === 4);
+            
+            pools.forEach(pool => {
+                assert.equal(String(pool._id).length, 24)
+                assert(pool.startDate instanceof Date)
+                assert(pool.endDate instanceof Date)
+            });
+        });
+    })
 
     after(function (done) {
         mongoose.connection.db.dropDatabase(function () {
