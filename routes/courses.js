@@ -27,7 +27,7 @@ router.post('/', (req, res) => {
     UserModel.findById(req.body.userId)
     .then(user => {
         const courseData = req.body.course;
-        courseData.user = user
+        courseData.user = user;
         return CourseModel.create(courseData);
     }).then(course => {
         res.redirect('/users/' + String(course.user._id));
