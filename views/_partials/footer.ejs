@@ -1,8 +1,8 @@
-<a href="/users">Users</a>
-<a href="/register">Register</a>
 <% if (session.user) { %>
+    <a href="/users/<%= session.user._id %>">Profile</a>
     <a href="/logout">Logout</a>
 <% } else { %>
+    <a href="/register">Register</a>
     <a href="/login">Login</a>
 <% } %>
 

@@ -26,10 +26,7 @@ router.get('/', function (req, res) {
  */ 
 
 router.get('/register', function (req, res) {
-    res.render('register', {
-        appName: appName,
-        pageTitle: "Register",
-    });
+    res.redirect('/users/new');
 });
 
 
@@ -101,7 +98,7 @@ router.post('/api/register', function(req, res) {
  */ 
 
 router.get('/login', function (req, res) {
-    res.render('login', {
+    res.render('users/login', {
         appName: appName,
         pageTitle: "Login",
     });
@@ -191,7 +188,6 @@ router.post('/api/login', function(req, res, next) {
         }
     });
 });
-
 
 router.get('/logout', (req, res) => {
     if (req.session.user) {

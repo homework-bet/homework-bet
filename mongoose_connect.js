@@ -6,9 +6,9 @@ const settings = require('./app_settings.json');
 
 let db_name;
 if (app.get('env') === 'production') {
-    db_name = settings.db_name_prod || "homework-bet-prod";
+    db_name = settings.db_name_prod;
 } else {
-    db_name = settings.db_name_dev || "homework-bet-dev";
+    db_name = settings.db_name_dev;
 }
 const db_url = settings.db_host + db_name;
 

@@ -1,0 +1,21 @@
+<% include ../_partials/header %>
+
+    <h1>Login</h1>
+    
+        <form method="post" action="/users/login">
+            <label>Email:
+                <input type="text" name="email" size="25">
+            </label>
+
+            <label>Password:
+                <input type="password" name="password" size="25">
+            </label>
+
+            <input type="submit" value="Submit">
+            <% if (typeof error != 'undefined' && error.length > 0) { %>
+                <p><%= error %></p>
+            <% } %>
+
+        </form>
+
+<% include ../_partials/footer %>

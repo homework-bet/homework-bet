@@ -56,12 +56,18 @@ myApp.controller('routeController', ['$scope', function($scope) {
 }]);
 
 // campaignController
-myApp.controller('campaignController', ['$scope', '$log', function($scope, $log) {
-  $log.log($scope);
-  $log.log('campaignController is not yet set up.');
-}]);
+myApp.controller('campaignController', ['$scope', '$http', '$log', 
+  function($scope, $http, $log) {
+    $log.log($scope);
+    $log.log('campaignController is not yet set up.');
+    // what to do if going to the page directly?
+    // set up a function that gets the first active campaign from a list?
+    // that'd involve a get request for the whole pool
+    // otherwise if ID is provided, then get request with pool/id
+  }
+]);
 
-// loginController
+// loginController is for partials/login.html
 myApp.controller('loginController', ['$scope', '$http', '$location', '$log', 
   function($scope, $http, $location, $log) {
     $log.log($scope);
@@ -99,6 +105,7 @@ myApp.controller('loginController', ['$scope', '$http', '$location', '$log',
           // from here, we need to validate the response to determine where to go
           if($scope.loginResponse.error) {
             // TODO fix - this error passing is not correct syntax
+            // should we set this to a standard scope error?
             //$location.path('/404', {error: $scope.loginResponse.error});
             $location.path('/404');
           } else {
@@ -112,16 +119,38 @@ myApp.controller('loginController', ['$scope', '$http', '$location', '$log',
         $scope.headers = response.headers();
       });
     };
-}]);
+  }
+]);
 
 // profileController
-myApp.controller('profileController', ['$scope', '$log', function($scope, $log) {
-  $log.log($scope);
-  $log.log('profileController is not yet set up.');
-}]);
+myApp.controller('profileController', ['$scope', '$http', '$log', 
+  function($scope, $http, $log) {
+    $log.log($scope);
+    $log.log('profileController is not yet set up.');
+    // Is user's ID in $scope anywhere? How do we query? I assume by ID?
+    // needs to get user info, based on logged in user
+    // needs to get user's active campaigns
+    // needs to get all campaigns
+    // should populate data on page based on these lists 
+    // - ALL CAMPAIGN list should have links with ID for redirect to 
+    // campaigns/:id
+  }
+]);
 
 myApp.controller('registerController', ['$scope', '$http', '$location', 
   function($scope, $http, $location) {
+
+    var request = $http.get('/api/register');    
+    request.success(function(data) {
+        $scope.registerFormData = data;
+        console.log(data);
+        console.log("SUCCESSFULLY GOT THE REGISTER PAGE STUFF!");
+    });
+    request.error(function(data){
+        console.log('Error: ' + data);
+    });
+
+
     $scope.registerUser = function() {
       console.log($scope.user);
         var data = {
@@ -153,8 +182,7 @@ myApp.controller('registerController', ['$scope', '$http', '$location',
         $scope.headers = response.headers();
       });
     };
-
-
-}]);
+  }
+]);
 
 
