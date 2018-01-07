@@ -37,9 +37,9 @@ const VerificationModel = require('./models/VerificationModel');
 
 // express set up =============================================================
 
-const port = settings.port || 3000;
-const ip = settings.ip || "localhost";
-const appName = settings.app_name || "homework-bet-dev";
+const port = settings.port;
+const ip = settings.ip;
+const appName = settings.app_name;
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));

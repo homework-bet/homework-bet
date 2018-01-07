@@ -11,7 +11,7 @@ const UserFactory = require('../factories/User');
 const CourseModel = require('../models/CourseModel');
 const CourseFactory = require('../factories/Course');
 
-const dbName = settings.db_name_test || "homework-bet-test";
+const dbName = settings.db_name_test;
 const dbUrl = settings.db_host + dbName;
 
 describe('Course Model Tests', function () {
