@@ -214,6 +214,11 @@ header.masthead {
   padding: 25px;
 }
 
+.userForm  h2, .userForm legend {
+  text-align: center;
+  color: #17a2b8;
+}
+
 .campaigns {
   width: 80%;
   /*height: 100%;*/
@@ -225,6 +230,27 @@ header.masthead {
 
 .campaignStatus {
   padding-left: 10px;
+}
+
+
+.profile {
+  width: 80%;
+  height: 100%;
+  align-content: center;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 12px 12px 2px 1px rgba(0, 0, 0, .2);
+  padding: 25px;
+}
+
+
+
+.section-title {
+  text-align: center;
+  color: #17a2b8;  
+}
+
+.sub-section-title {
+  color: #17a2b8; 
 }
 
 .pages {
@@ -240,3 +266,4 @@ header.masthead {
   height: 100vh;
   background-color: #ffa654;
 }
+
