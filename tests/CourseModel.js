@@ -5,6 +5,7 @@ const assert = chai.assert;
 const expect = chai.expect;
 const settings = require('../app_settings.json');
 
+const moment = require('moment');
 const UserModel = require('../models/UserModel');
 const UserFactory = require('../factories/User');
 const CourseModel = require('../models/CourseModel');
@@ -41,17 +42,36 @@ describe('Course Model Tests', function () {
         });
     }),
 
-        it('Course with no user fails to save.', function (done) {
-            const courseData = CourseFactory.random({});
-            const course = new CourseModel(courseData);
+    it('Course with no user fails to save.', function (done) {
+        const courseData = CourseFactory.random({});
+        const course = new CourseModel(courseData);
 
-            CourseModel.create(courseData).then(function (course) {
-                console.log("Saved invalid course!");
-                assert();
-            }).catch(function (err) {
-                done();
-            });
-        }),
+        CourseModel.create(courseData).then(function (course) {
+            console.log("Saved invalid course!");
+            assert();
+        }).catch(function (err) {
+            done();
+        });
+    }),
+
+    it("shouldn't save a course with endDate preceeding startDate", () => {
+        const userData = UserFactory.random();
+        const courseData = CourseFactory.random({});
+        
+        courseData.startDate = moment().add(1, 'days');
+        courseData.endDate = moment();
+
+        return UserModel.create(userData)
+        .then((user) => {
+            courseData.user = user;
+            return CourseModel.create(courseData)
+        }).then(() => {
+            console.log("Course with invalid dates was saved.");
+            assert(false)
+        }, (err) => {
+            assert(true)
+        });
+    }),
 
     after(function (done) {
         mongoose.connection.db.dropDatabase(function () {
