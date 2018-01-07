@@ -21,7 +21,6 @@ const courseSchema = Schema({
 courseSchema.pre('save', function(next) {
     
     if( this.startDate > this.endDate ) {
-        console.log("course date mismatch found");
         next( new Error('Course end date must be greater than course start date!') );
         return;
     }

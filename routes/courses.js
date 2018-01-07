@@ -26,7 +26,7 @@ router.get('/new', authChecker, function (req, res) {
 });
 
 router.post('/', authChecker, (req, res) => {
-    UserModel.findById(req.session.user._id).exec()
+    UserModel.findById(req.body.userId)
     .then(user => {
         const courseData = req.body.course;
         courseData.user = user;
@@ -35,7 +35,7 @@ router.post('/', authChecker, (req, res) => {
         res.redirect('/users/' + String(course.user._id));
     }).catch(err => {
         console.log(err);
-        res.redirect('courses/new');
+        res.redirect('/courses/new');
     });
 });
 
