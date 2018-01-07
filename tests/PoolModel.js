@@ -4,6 +4,7 @@ const chai = require('chai');
 const assert = chai.assert;
 const expect = chai.expect;
 const settings = require('../app_settings.json');
+const moment = require('moment');
 
 const UserModel = require('../models/UserModel');
 const UserFactory = require('../factories/User');
@@ -27,33 +28,38 @@ describe('Pool Model Tests', function () {
         });
     }),
 
-    it('should save a valid pool to the database.', function (done) {
+    it('should save a valid pool to the database.', () => {
+        const poolData = PoolFactory.random();
+
+        return PoolModel.create(poolData)
+        .then(pool => {
+            assert.equal(Date(pool.startDate), Date(poolData.startDate));
+            assert.equal(Date(pool.endDate), Date(pool.endDate));
+        });
+    });
+
+    it('should hold a course.', () => {
         const userData = UserFactory.random();
         const courseData = CourseFactory.random({});
 
-        UserModel.create(userData)
-            .then(user => {
-                courseData.user = user;
-                return CourseModel.create(courseData);
-            }).then(course => {
-                const poolData = {
-                    courses: [course],
-                    startDate: course.startDate,
-                    endDate: course.endDate,
-                };
+        return UserModel.create(userData)
+        .then(user => {
+            courseData.user = user;
+            return CourseModel.create(courseData);
+        }).then(course => {
+            const poolData = {
+                courses: [course],
+                startDate: course.startDate,
+                endDate: course.endDate,
+            };
 
-                return PoolModel.create(poolData);
-            }).then(pool => {
-                course = pool.courses[0];
-                assert.equal(course.name, courseData.name);
-                assert.equal(course.startDate, courseData.startDate);
-                assert.equal(course.endDate, courseData.endDate);
-                done();
-            }).catch(err => {
-                console.log("Unable to save valid pool.");
-                assert();
-            }
-        );
+            return PoolModel.create(poolData);
+        }).then(pool => {
+            course = pool.courses[0];
+            assert.equal(course.name, courseData.name);
+            assert.equal(course.startDate, courseData.startDate);
+            assert.equal(course.endDate, courseData.endDate);
+        });
     });
 
     after(function (done) {
