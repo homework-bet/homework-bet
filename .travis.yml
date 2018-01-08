@@ -1,11 +1,9 @@
 language: node_js
 node_js:
  - "node"
-
-before-script:
- - "./build.sh"
-
+ 
 script:
+ - "./build.sh"
  - "npm test"
 
 services: 
