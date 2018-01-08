@@ -73,6 +73,7 @@ describe('Pool Model Tests', function () {
                 assert.equal(String(pool._id).length, 24)
                 assert(pool.startDate instanceof Date)
                 assert(pool.endDate instanceof Date)
+                assert.equal(pool.startDate.getFullYear(), 2018)
             });
         });
     })
