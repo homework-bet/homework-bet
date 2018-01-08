@@ -64,6 +64,9 @@ app.use(function (req, res, next) {
 
 app.use(routes);
 
-app.listen(port, ip, function() {
+let server = app.listen(port, ip, function() {
     console.log(`${appName} started at ${ip}:${port}`);
 })
+
+module.exports = server;
+module.exports.stop = () => server.close();
