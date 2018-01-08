@@ -222,6 +222,29 @@ myApp.controller('profileController', ['$scope', '$http', '$log',
     // should populate data on page based on these lists 
     // - ALL CAMPAIGN list should have links with ID for redirect to 
     // campaigns/:id
+    $scope.campData = {};
+    var request = $http.get('/api/pools/');    
+    request.success(function(data) {
+      
+        // just get the first entry for now 
+        pool = data.pools[0];
+        console.log(pool);
+        start = new Date(pool.startDate);
+        end = new Date(pool.endDate);
+        
+        $scope.campData = {     startMonth: _monthNames[ start.getMonth() ], 
+                                endMonth: _monthNames[ end.getMonth() ],
+                                startDay: start.getDate(),
+                                endDay: end.getDate()
+                                };
+        console.log("successfully got campaign data");
+    });
+    request.error(function(data){
+        console.log('Error: ' + data);
+    });
+  
+
+
   }
 ]);
 

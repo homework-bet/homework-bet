@@ -3,28 +3,30 @@
   <div class="container profile">
     <div class="row">
       <div class="col-lg-12 mx-auto">
-        <h2 class="section-title">Welcome {user.firstName}!</h2>
-        <div class= "p-3">
-          <h3 class="sub-section-title">Campaigns</h3>
-          <ul>
+        <!--<h2 class="section-title">Welcome {user.firstName}!</h2>-->
+        <h2 class="section-title">Welcome!</h2>
+
+        <!--<div class= "p-3">-->
+        <!--  <h3 class="sub-section-title">Campaigns</h3>-->
+        <!--  <ul>-->
             <!--
-                there's an angular if that'll render this, once we can get it,
-                need to add a get request to the controller for this to get both 
-                user data and course list
-            -->
-            <li>{{current course item list}}</li>
-          </ul>
-        </div>
+        <!--        there's an angular if that'll render this, once we can get it,-->
+        <!--        need to add a get request to the controller for this to get both -->
+        <!--        user data and course list-->
+        <!--    -->
+        <!--    <li>{current course item list}</li>-->
+        <!--  </ul>-->
+        <!--</div>-->
         <div class= "p-3">
           <h3 class="sub-section-title">Join a Campaign!</h3>
-          <ul>
-            <!--
-                there's an angular if that'll render this, once we can get it,
-                need to add a get request to the controller for this to get both 
-                user data and course list
-            -->
-            <li>{{current course item list}}</li>
-          </ul>            
+          <!--<div ng-if="campData">-->
+          <!--  <div ng-repeat="campaign in campData">-->
+          <!--    <p>{{campaign.startMonth + " " + campaign.startDay + "-" + campaign.endMonth + " " + campaign.endDay}}</p>-->
+          <!--  </div>-->
+          <!--</div>-->
+          
+          <p><a href="#/campaigns">{{campData.startMonth + " " + campData.startDay + "-" + campData.endMonth + " " + campData.endDay}}</a></p>
+
         </div>
       </div>
     </div>
