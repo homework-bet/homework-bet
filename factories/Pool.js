@@ -1,5 +1,4 @@
 const moment = require('moment');
-const PoolModel = require('../models/PoolModel')
 
 const UserFactory = require('./User')
 const UserModel = require('../models/UserModel')
@@ -76,6 +75,7 @@ const createPools = (year, numUsers, numCoursesEach) => {
         console.log(err)
        return Promise.reject(err)
     })
+}
 
 module.exports = {
     random: random,
