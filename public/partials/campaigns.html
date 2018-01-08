@@ -2,14 +2,15 @@
   <div class="container campaigns">
     <div class="row">
       <div class="col-lg-12 mx-auto">
-        <h1 class="tealDream">{{Season Year}} HomeworkBet</h1>
-        <h5>{{startDate}} - {{endDate}}</h5>
+
+        <h1 class="tealDream">{{campData.year + " " + "Campaign"}}</h1>
+        <h5>{{campData.startMonth + " " + campData.startDay + "-" + campData.endMonth + " " + campData.endDay}}</h5>
       </div>
     </div>
     <div class="row">
       <div class="col-lg-7">
         <p><h5 class="centerText"><em>How it Works</em></h5></p>
-          The rules are simple. Bet {{betAmount}}, finish your school term with a {hwPercent} homework grade,
+          The rules are simple. Bet {betAmount}, finish your school term with a {hwPercent} homework grade,
           or a {gradePercent} final grade in your course, and collect an equal share of the pot with your
           fellow winners!
         <hr>
@@ -19,17 +20,17 @@
             <tr>
               <td>
                 <strong>Game Begins</strong><br>
-                {{Month}} {{Day}}<br>
+                {{campData.startMonth + " " + campData.startDay}}<br>
               </td>
               <td style="padding-left: 40px">
                 <strong>Last Day to Register</strong><br>
-                {{Month}} {{Day}}<br>
+                {Month} {Day}<br>
               </td>
             </tr>
             <tr>
               <td>
                 <strong>Grade Turn-In Deadline</strong><br>
-                {{Month}} {{Day}}<br>
+                {{campData.endMonth + " " + campData.endDay}}<br>
               </td>
             </tr>
           </tbody>
@@ -49,7 +50,7 @@
                 <i class="fa fa-money fa-4x awesomeOrange"></i> 
               </td>
               <td class="campaignStatus awesomeOrange">
-                <h3>$ {{Bet}} BET</h3>
+                <h3>$25 BET</h3>
               </td>
             </tr>
             <tr>
@@ -57,7 +58,7 @@
                 <i class="fa fa-user fa-4x awesomeOrange"></i> 
               </td>
               <td class="campaignStatus awesomeOrange">
-                <h3>{{Students}} STUDENTS</h3>
+                <h3>{Students} STUDENTS</h3>
               </td>
             </tr>
             <tr>
@@ -65,7 +66,7 @@
                 <i class="fa fa-usd fa-4x awesomeOrange"></i> 
               </td>
               <td class="campaignStatus awesomeOrange">
-                <h3>$ {{TotalPot}} POT</h3>
+                <h3>$ {TotalPot} POT</h3>
               </td>
             </tr>
             <tr>
@@ -73,7 +74,7 @@
                 <i class="fa fa-calendar fa-4x awesomeOrange"></i> 
               </td>
               <td class="campaignStatus awesomeOrange">
-                <h3>{{Month}} {{Day}} START DATE</h3>
+                <h3>{{campData.startMonth + " " + campData.startDay + " " + "START DATE"}}</h3>
               </td>
             </tr>
             <tr>
