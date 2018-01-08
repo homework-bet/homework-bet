@@ -1,4 +1,5 @@
 const moment = require('moment');
+const PoolModel = require('../models/PoolModel')
 
 const UserFactory = require('./User')
 const UserModel = require('../models/UserModel')
@@ -20,6 +21,16 @@ const generateYear = year => {
         {startDate: new Date(year, 6, 1), endDate: new Date(year, 8, 30)},
         {startDate: new Date(year, 9, 1), endDate: new Date(year, 11, 31)},
     ];
+}
+
+const createPoolsForCurrentYear = () => {
+    const poolDataArray = generateYear(moment().year())
+    return PoolModel.create(poolDataArray).then(pools => {
+        console.log("Creating pools.")
+        return Promise.resolve(pools);
+    }).catch(err => {
+        return Promise.reject(err);
+    });
 }
 
 const createPools = (year, numUsers, numCoursesEach) => {
@@ -65,10 +76,10 @@ const createPools = (year, numUsers, numCoursesEach) => {
         console.log(err)
        return Promise.reject(err)
     })
-}
 
 module.exports = {
     random: random,
     generateYear: generateYear,
     createPools: createPools,
+    createPoolsForCurrentYear: createPoolsForCurrentYear,
 }

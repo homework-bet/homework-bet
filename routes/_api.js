@@ -4,6 +4,6 @@ const express = require('express'),
 
 router.use('/users', require('./api/users'));
 router.use('/courses', require('./api/courses'));
-// router.use(require('/pools/', './api/pools'));
+router.use('/pools', require('./api/pools'));
 
 module.exports = router;
