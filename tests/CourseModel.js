@@ -73,6 +73,13 @@ describe('Course Model Tests', function () {
         });
     }),
 
+    it("should save a course created by CourseFactory.createRandom()", () => {
+        return CourseFactory.createRandom()
+        .then(course => {
+            assert(course, "course not created")
+        })
+    })
+
     after(function (done) {
         mongoose.connection.db.dropDatabase(function () {
             mongoose.connection.close(done);
