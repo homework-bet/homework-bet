@@ -29,7 +29,6 @@ const random = () => {
 
 const createRandom = () => {
     const userData = random()
-    console.log(`Creating ${userData.email} with password ${userData.password}`)
     return UserModel.create(userData);
 }
 
