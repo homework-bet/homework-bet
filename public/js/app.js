@@ -88,7 +88,10 @@ myApp.controller('campaignController', ['$scope', '$http', '$log',
                             startDay: 1,
                             endDay: 2 
                             };
+    console.log($scope.test);
+    console.log($scope.campData);
   }
+  
 ]);
 
 // loginController is for partials/login.html
