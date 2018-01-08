@@ -28,7 +28,9 @@ const random = () => {
 }
 
 const createRandom = () => {
-    return UserModel.create(random());
+    const userData = random()
+    console.log(`Creating ${userData.email} with password ${userData.password}`)
+    return UserModel.create(userData);
 }
 
 module.exports = {
