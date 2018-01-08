@@ -34,6 +34,6 @@ const createRandom = () => {
 module.exports = {
     specifed: specifed,
     random: random,
-    createRandom: createRandom(),
+    createRandom: createRandom,
 };
 
