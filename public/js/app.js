@@ -88,8 +88,8 @@ myApp.controller('campaignController', ['$scope', '$http', '$log',
                             endDay: 2, 
                             year: 2018
                             };
-
   }
+  
 ]);
 
 // loginController is for partials/login.html
