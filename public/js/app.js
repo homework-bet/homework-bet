@@ -61,34 +61,42 @@ myApp.controller('campaignController', ['$scope', '$http', '$log',
     $log.log('campaignController is not yet fully set up.');
    
 //    $scope.data = {};
-//    $scope.campData = {};
+    $scope.campData = {};
     // what to do if going to the page directly?
     // set up a function that gets the first active campaign from a list?
     // that'd involve a get request for the whole pool
-/*
     // otherwise if ID is provided, then get request with pool/id
-    var request = $http.get('/api/pool/');    
-    request.success(function(data) {
-        $scope.campData = {     startMonth: _monthNames[ data.startDate.getMonth() ], 
-                                endMonth: _monthNames[ data.endDate.getMonth() ],
-                                startDay: data.StartDate.getDate(),
-                                endDay: data.endDate.getDate()
-                                };
-        console.log(data);
-        console.log("successfully got campaign data");
-    });
-    request.error(function(data){
-        console.log('Error: ' + data);
-    });
+
+    // for now, just getting the earliest pool to start
+
+        var request = $http.get('/api/pools/');    
+        request.success(function(data) {
+          
+            // just get the first entry for now 
+            pool = data.pools[0];
+            console.log(pool);
+            start = new Date(pool.startDate);
+            end = new Date(pool.endDate);
+            
+            $scope.campData = {     startMonth: _monthNames[ start.getMonth() ], 
+                                    endMonth: _monthNames[ end.getMonth() ],
+                                    startDay: start.getDate(),
+                                    endDay: end.getDate()
+                                    };
+            console.log("successfully got campaign data");
+        });
+        request.error(function(data){
+            console.log('Error: ' + data);
+        });
   }
-*/
+/*
     $scope.campData = {     startMonth: _monthNames[ 0 ], 
                             endMonth: _monthNames[ 1 ],
                             startDay: 1,
                             endDay: 2, 
                             year: 2018
                             };
-  }
+*/
   
 ]);
 
