@@ -22,7 +22,7 @@ const random = () => {
     return {
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
-        password: faker.internet.password(),
+        password: "password",
         email: faker.internet.email(),
     };
 }
