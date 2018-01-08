@@ -157,9 +157,9 @@ myApp.controller('loginController', ['$scope', '$http', '$location', '$log',
   
     var request = $http.get('/api/login');    
     request.success(function(data) {
-        $scope.loginFormData = data;
-        console.log(data);
-        console.log("SUCCESSFULLY GOT THE LOGIN PAGE STUFF!");
+      $scope.loginFormData = data;
+      // console.log(data); //TODO remove after testing
+      // console.log("SUCCESSFULLY GOT THE LOGIN PAGE STUFF!");
     });
     request.error(function(data){
         console.log('Error: ' + data);
@@ -222,9 +222,9 @@ myApp.controller('registerController', ['$scope', '$http', '$location',
 
     var request = $http.get('/api/register');    
     request.success(function(data) {
-        //$scope.registerFormData = data; //TODO remove after testing
-        console.log(data);
-        console.log("SUCCESSFULLY GOT THE REGISTER PAGE STUFF!");
+        $scope.registerFormData = data; 
+        //console.log(data);
+        //console.log("SUCCESSFULLY GOT THE REGISTER PAGE STUFF!");
     });
     request.error(function(data){
         console.log('Error: ' + data);
