@@ -40,7 +40,6 @@ const createRandomWithThisUser = (user) => {
     
     return CourseModel.create(courseData)
     .then(course => {
-        console.log(`Added ${user.email} to course: ${course._id}`)
         return Promise.resolve(course)
     }).catch(err => {
         return Promise.reject("Course not created.")

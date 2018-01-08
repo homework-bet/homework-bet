@@ -95,7 +95,19 @@ describe('User Model Tests', function() {
             assert.equal(courses[0].name, course.name);
             assert.equal(String(courses[0]._id), String(course._id));
         });
-    }),
+    })
+
+    it('should hash passwords', () => {
+        const userData = UserFactory.random();
+        
+        return UserModel.create(userData)
+        .then(user => {
+            assert.notEqual(userData.password, user.password)
+            assert(user.password.length === 59 || user.password.length === 60,
+                "Password hash should be 59 or 60 chars.")
+            assert.include(user.password, "$2a$", "Password hash should have $2a$")
+        })
+    })
 
     // TODO: check on this test to make sure it isn't evergreen
     it('should register with valid credentials', function(done) {
