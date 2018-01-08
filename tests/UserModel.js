@@ -25,7 +25,7 @@ describe('User Model Tests', function() {
         });
     }),
 
-    it('New user saved to database', function (done) {
+    it('should save valid user', function (done) {
         const userData = UserFactory.random();
         UserModel.create(userData).then(function (user) {
             assert.equal(user.firstName, userData.firstName);
@@ -38,7 +38,16 @@ describe('User Model Tests', function() {
         });
     }),
 
-    it('User missing firstName, not saved.', function (done) {
+    it('should save from UserFactory.createRandom()', () => {
+        return UserFactory.createRandom()
+        .then(user => {
+            return UserModel.findById(user)
+        }).then(user => {
+            assert(user, "User not created.");
+        })
+    })
+
+    it('should not save with missing firstName,', function (done) {
         const userData = UserFactory.random();
         delete userData.firstName;
 
@@ -64,7 +73,7 @@ describe('User Model Tests', function() {
         });
     }),
 
-    it("Method for getting the user's courses", function () {
+    it("should return courses()", function () {
         const userData = UserFactory.random();
         const courseData = CourseFactory.random();
         let user = {};
@@ -89,7 +98,7 @@ describe('User Model Tests', function() {
     }),
 
     // TODO: check on this test to make sure it isn't evergreen
-    it('User register with valid credentials', function(done) {
+    it('should register with valid credentials', function(done) {
         const userData = UserFactory.random();
         newUser = new UserModel( userData );
         newUser.save( function(err) {
