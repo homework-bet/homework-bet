@@ -59,6 +59,7 @@ myApp.controller('campaignController', ['$scope', '$http', '$log',
   function($scope, $http, $log) {
     $log.log($scope);
     $log.log('campaignController is not yet fully set up.');
+   
 //    $scope.data = {};
 //    $scope.campData = {};
     // what to do if going to the page directly?
@@ -81,13 +82,13 @@ myApp.controller('campaignController', ['$scope', '$http', '$log',
     });
   }
 */
-
-    $scope.test = "hi there";
     $scope.campData = {     startMonth: _monthNames[ 0 ], 
                             endMonth: _monthNames[ 1 ],
                             startDay: 1,
-                            endDay: 2 
+                            endDay: 2, 
+                            year: 2018
                             };
+
   }
 ]);
 

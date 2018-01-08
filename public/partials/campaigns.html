@@ -2,9 +2,8 @@
   <div class="container campaigns">
     <div class="row">
       <div class="col-lg-12 mx-auto">
-        <h1 class="tealDream">{{test}} HomeworkBet</h1>
-        <h1 class="tealDream">{{Season Year}} HomeworkBet</h1>
-        <h5>{{campData}}/{{campData.startDay}} - {{campData.endMonth}}/{{campData.endDay}}</h5>
+        <h1 class="tealDream">{{campData.year + " " + "Campaign"}}</h1>
+        <h5>{{campData.startMonth + " " + campData.startDay + "-" + campData.endMonth + " " + campData.endDay}}</h5>
       </div>
     </div>
     <div class="row">
@@ -20,7 +19,7 @@
             <tr>
               <td>
                 <strong>Game Begins</strong><br>
-                {{campData.startMonth}} {{campData.startDay}}<br>
+                {{campData.startMonth + " " + campData.startDay}}<br>
               </td>
               <td style="padding-left: 40px">
                 <strong>Last Day to Register</strong><br>
@@ -30,7 +29,7 @@
             <tr>
               <td>
                 <strong>Grade Turn-In Deadline</strong><br>
-                {{Month}} {{Day}}<br>
+                {{campData.endMonth + " " + campData.endDay}}<br>
               </td>
             </tr>
           </tbody>
@@ -50,7 +49,7 @@
                 <i class="fa fa-money fa-4x awesomeOrange"></i> 
               </td>
               <td class="campaignStatus awesomeOrange">
-                <h3>$ {{Bet}} BET</h3>
+                <h3>$25 BET</h3>
               </td>
             </tr>
             <tr>
@@ -58,7 +57,7 @@
                 <i class="fa fa-user fa-4x awesomeOrange"></i> 
               </td>
               <td class="campaignStatus awesomeOrange">
-                <h3>{{Students}} STUDENTS</h3>
+                <h3>{Students} STUDENTS</h3>
               </td>
             </tr>
             <tr>
@@ -66,7 +65,7 @@
                 <i class="fa fa-usd fa-4x awesomeOrange"></i> 
               </td>
               <td class="campaignStatus awesomeOrange">
-                <h3>$ {{TotalPot}} POT</h3>
+                <h3>$ {TotalPot} POT</h3>
               </td>
             </tr>
             <tr>
@@ -74,7 +73,7 @@
                 <i class="fa fa-calendar fa-4x awesomeOrange"></i> 
               </td>
               <td class="campaignStatus awesomeOrange">
-                <h3>{{campData.startMonth}} {{campData.startDay}} START DATE</h3>
+                <h3>{{campData.startMonth + " " + campData.startDay + " " + "START DATE"}}</h3>
               </td>
             </tr>
             <tr>
