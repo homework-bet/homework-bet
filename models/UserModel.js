@@ -5,10 +5,19 @@ const mongoose = require('mongoose'),
 
 const CourseModel = require('./CourseModel');
 
+const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
 const userSchema = mongoose.Schema({
     firstName: {type: String, required: true, trim: true},
     lastName: {type: String, required: true, trim: true},
-    email: {type: String, unique: true, required: true, trim: true},
+    email: {type: String, unique: true, required: true, trim: true,
+        validate: {
+            validator: (email) => {
+                return emailRegex.test(email);
+            },
+            message: `email is not valid!`
+        },
+    },
     password: {type: String, required: true},
     created: {type: Date, default: Date.now, required: true},
 });
@@ -20,25 +29,27 @@ const userSchema = mongoose.Schema({
 userSchema.pre('save', function(next) {
     var user = this;
         
-    if( !user.isModified('password') ) return next();
-
-    // generate salt
-    bcrypt.genSalt( SALT_WORK_FACTOR, function(err, salt) {
-        if(err) {
-            return next(err);
-        } 
-
-        // hash password 
-        bcrypt.hash(user.password, salt, function(err, hash) {
-            if(err) { 
+    if( user.isModified('password') ) {
+        // generate salt
+        bcrypt.genSalt( SALT_WORK_FACTOR, function(err, salt) {
+            if(err) {
                 return next(err);
-            }
+            } 
 
-            // finally, override password with hash
-            user.password = hash;
-            next();
+            // hash password 
+            bcrypt.hash(user.password, salt, function(err, hash) {
+                if(err) { 
+                    return next(err);
+                }
+
+                // finally, override password with hash
+                user.password = hash;
+                next();
+            });
         });
-    });
+    }
+
+    return next()
 });
 
 

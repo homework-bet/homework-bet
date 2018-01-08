@@ -50,6 +50,20 @@ describe('User Model Tests', function() {
         });
     }),
 
+    it("should not save with invalid email", () => {
+        const userData = UserFactory.random();
+        userData.email = "email@domain";
+
+        return UserModel.create(userData)
+        .then(() => {
+            // saved a user with invalid email.
+            assert(false)
+        }, () => {
+            // did not save, so this is correct.
+            assert(true);
+        });
+    }),
+
     it("Method for getting the user's courses", function () {
         const userData = UserFactory.random();
         const courseData = CourseFactory.random();
