@@ -1,0 +1,52 @@
+<section class="p-6 pages">
+  <div class="container userForm">
+    <div class="row">
+      <div class="col-lg-12 mx-auto">
+        <div ng-if="messages.error" role="alert" class="alert alert-danger">
+          <div ng-repeat="error in messages.error">{{error.msg}}</div>
+        </div>
+        
+        
+        <form ng-submit="addCourse()">
+            <h2>Add a Course</h2>  
+            <fieldset>  
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-12 control-label" for="courseTitle">Course Title</label>  
+              <div class="col-md-12">
+              <input id="courseTitle" name="courseTitle" type="text" placeholder="Basketweaving 101" 
+                class="form-control input-md" required="" ng-model="newCourse.name" autofocus>
+                
+              </div>
+            </div>
+          
+            <!-- Date input-->
+            <div class="form-group">
+              <label class="col-md-12 control-label" for="termStart">Term Start</label>  
+              <div class="col-md-12">
+                  <input id="termStart" name="termStart" type="date" class="form-control input-md" ng-model="newCourse.startDate">
+              </div>
+            </div>
+          
+            <!-- Date input-->
+            <div class="form-group">
+              <label class="col-md-12 control-label" for="termEnd">Term End</label>  
+              <div class="col-md-12">
+                  <input id="termEnd" name="termEnd" type="date" class="form-control input-md" ng-model="newCourse.endDate">
+              </div>
+            </div>
+         
+            <!-- Button -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="singlebutton"></label>
+              <div class="col-md-4">
+                <button id="singlebutton" name="singlebutton" class="btn btn-info">Submit</button>
+              </div>
+            </div>
+          
+            </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
