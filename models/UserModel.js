@@ -26,30 +26,30 @@ const userSchema = mongoose.Schema({
  * adapted from devsmash.com/blog/password-authentication-with-mongoose-and-bcrypt
  */
 
-userSchema.pre('save', function(next) {
+userSchema.pre('save', function (next) {
     var user = this;
-        
-    if( user.isModified('password') ) {
-        // generate salt
-        bcrypt.genSalt( SALT_WORK_FACTOR, function(err, salt) {
-            if(err) {
-                return next(err);
-            } 
 
-            // hash password 
-            bcrypt.hash(user.password, salt, function(err, hash) {
-                if(err) { 
-                    return next(err);
-                }
-
-                // finally, override password with hash
-                user.password = hash;
-                next();
-            });
-        });
+    if (!user.isModified('password')) {
+        return next()
     }
 
-    return next()
+    // generate salt
+    bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
+        if (err) {
+            return next(err);
+        }
+
+        // hash password 
+        bcrypt.hash(user.password, salt, function (err, hash) {
+            if (err) {
+                return next(err);
+            }
+
+            // finally, override password with hash
+            user.password = hash;
+            next();
+        });
+    });
 });
 
 
