@@ -3,6 +3,7 @@ const router = express.Router();
 const settings = require('../../app_settings');
 const UserModel = require('../../models/UserModel');
 const CourseModel = require('../../models/CourseModel');
+const PoolModel = require('../../models/PoolModel')
 
 // TODO: lock this down to admins?
 router.get('/', (req, res) => {
@@ -22,6 +23,44 @@ router.get('/', (req, res) => {
                 res.json({ error: err.errmsg });
             }
         );
+    }
+});
+
+// POST /api/courses
+// Create a new course and add it to the pool with closest end date
+router.post('/', (req, res) => {
+    const currentUser = req.session.user;
+    let course
+
+    if (!currentUser) {
+        // no logged in user
+        res.json({ error: "No user logged in." });
+    } else {
+        const courseData = req.body.course;
+        const poolId = req.body.poolId;
+
+        courseData['user'] = currentUser
+
+        CourseModel.create(courseData)
+        .then(newCourse => {
+            course = newCourse
+
+            return PoolModel.find().sort('endDate')
+                .findOneAndUpdate({
+                    endDate: { $gt: course.endDate },
+                    startDate: { $lt: course.startDate },
+                },{ 
+                    "$push": { courses: course } },
+                    { new: true })
+        }).then(pool => {
+            res.json({
+                course: course,
+                pool: pool,
+            })
+        }).catch( err => {
+            console.log(`/api/course POST error: ${err}`)
+            res.json({ error: err.errmsg })
+        })
     }
 });
 
