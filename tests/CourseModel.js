@@ -80,6 +80,13 @@ describe('Course Model Tests', function () {
         })
     })
 
+    it("should have a default bet amount of $25", () => {
+        return CourseFactory.createRandom()
+        .then(course => {
+            assert.equal(course.betAmount, 25, "course.betAmount should be 25")
+        })
+    })
+
     after(function (done) {
         mongoose.connection.db.dropDatabase(function () {
             mongoose.connection.close(done);

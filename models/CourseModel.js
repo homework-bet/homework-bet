@@ -7,6 +7,7 @@ const courseSchema = Schema({
     pool: { type: Schema.Types.ObjectId, ref: 'Pool' },
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
+    betAmount: { type: Number, default: 25, },
     enrollVerification: { type: Schema.Types.ObjectId, ref: 'Verification' },
     completedVerification: { type: Schema.Types.ObjectId, ref: 'Verification' },
     payment: {type: Schema.Types.ObjectId, ref: 'Payment' },
