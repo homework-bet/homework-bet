@@ -71,9 +71,9 @@ myApp.controller('addCourseController', ['$scope', '$http', '$log',
     $scope.addCourse = function() {
       console.log($scope.newCourse); //TODO remove after testing
       var data = {
-        name:       $scope.user.firstName,
-        startDate:  $scope.user.startDate,
-        endDate:    $scope.user.endDate
+        name:       $scope.newCourse.name,
+        startDate:  $scope.newCourse.startDate,
+        endDate:    $scope.newCourse.endDate
       };
       // set up request
       $http.post('/api/courses/new', JSON.stringify(data)).then(function (response) {
@@ -123,7 +123,8 @@ myApp.controller('campaignController', ['$scope', '$http', '$log',
     // otherwise if ID is provided, then get request with pool/id
 
     // for now, just getting the earliest pool to start
-
+    // this would need to pass the selected campaign ID to the next page later
+  
         var request = $http.get('/api/pools/');    
         request.success(function(data) {
           
@@ -133,12 +134,15 @@ myApp.controller('campaignController', ['$scope', '$http', '$log',
             start = new Date(pool.startDate);
             end = new Date(pool.endDate);
             
-            $scope.campData = {     startMonth: _monthNames[ start.getMonth() ], 
-                                    endMonth: _monthNames[ end.getMonth() ],
-                                    startDay: start.getDate(),
-                                    endDay: end.getDate()
-                                    };
+            $scope.campData = {
+              campaignID: pool._id,
+              startMonth: _monthNames[ start.getMonth() ], 
+              endMonth: _monthNames[ end.getMonth() ],
+              startDay: start.getDate(),
+              endDay: end.getDate()
+            };
             console.log("successfully got campaign data");
+            console.log($scope.campData);
         });
         request.error(function(data){
             console.log('Error: ' + data);
