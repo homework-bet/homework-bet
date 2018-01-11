@@ -1,18 +1,22 @@
-## Pulling in changes
+## Homework-bet [![Build Status](https://travis-ci.org/homework-bet/homework-bet.svg?branch=master)](https://travis-ci.org/homework-bet/homework-bet)
 
-When pulling in new changes:
+Homework-Bet is a web app centered around the idea of students putting their money on the line to give financial motivation to do well in their courses. Students enter a course before the beginning of an academic term, and pledge money into a betting pool with a standard bet for each course. At the end of the term, students who have met the requirements (90%+ for their homework grade or an A- or better for their  final grade) will split the pool, potentially receiving more money back than they paid in from bets committed by students who did not meet the requirements.
 
-1. `git pull` to pull in changes from upstream or `git pull repo_name branch_name` to pull from a specific repo and branch.
-1. `npm install` to resolve dependency changes.
-1. Drop database table, if needed.
-  1. `mongo` to open the mongo console.
-  1. `use dbname` to select the correct database (probably `homework-bet-dev`)
-  1. `db.dropDatabase()` to drop the database.
-1. Check if `app_settings.json.template` has any new values that need to be reflected in your `app_settings.json`.
-1. `npm test` to verify that the code is passing tests.
-1. `npm start` to start the server.
+## Technologies used
 
-## Local Instructions
+* MongoDB/Mongoose
+* Express
+* Angular
+* Node.js
+
+## Team members
+
+* Colin Powell
+* Nathan Perkins
+* Neal Quigley
+* Sarah Maas
+
+## Local Installation Instructions
 
 Installing and running this app locally (tested on Mac).
 
@@ -27,7 +31,7 @@ Installing and running this app locally (tested on Mac).
 1. `npm start` to start the server.
 
 
-## C9 Instructions
+## C9 Installation Instructions
 
 Installing and running this app on [c9.io](https://c9.io/)
 1. Follow local instructions above except for install/start MongoDB
@@ -42,3 +46,16 @@ Installing and running this app on [c9.io](https://c9.io/)
     "ip": "0.0.0.0"
 1. Open another terminal to start the app with `npm start`
 
+## Pulling in changes
+
+When pulling in new changes:
+
+1. `git pull` to pull in changes from upstream or `git pull repo_name branch_name` to pull from a specific repo and branch.
+1. `npm install` to resolve dependency changes.
+1. Drop database table, if needed.
+  1. `mongo` to open the mongo console.
+  1. `use dbname` to select the correct database (probably `homework-bet-dev`)
+  1. `db.dropDatabase()` to drop the database.
+1. Check if `app_settings.json.template` has any new values that need to be reflected in your `app_settings.json`.
+1. `npm test` to verify that the code is passing tests.
+1. `npm start` to start the server.
