@@ -11,10 +11,10 @@ Homework-Bet is a web app centered around the idea of students putting their mon
 
 ## Team members
 
-* Colin Powell
-* Nathan Perkins
-* Neal Quigley
-* Sarah Maas
+* [@colingrahampowell](https://github.com/colingrahampowell)
+* [@nathanperkins](https://github.com/nathanperkins)
+* [@nea1ism](https://github.com/neal1ism)
+* [@sarahmaas](https://github.com/sarahmaas)
 
 ## Local Installation Instructions
 
