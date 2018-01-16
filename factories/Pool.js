@@ -6,6 +6,7 @@ const CourseFactory = require('./Course')
 const CourseModel = require('../models/CourseModel')
 const PoolModel = require('../models/PoolModel')
 
+// TODO: not really random.
 const random = () => {
     return {
         startDate: moment(),

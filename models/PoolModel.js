@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const poolSchema = mongoose.Schema({
-    startDate: {type: Date, required: true},
-    endDate: {type: Date, required: true},
+    startDate: { type: Date, required: true},
+    endDate: { type: Date, required: true},
+    betAmount: { type: Number, default: 25, required: true },
     courses: [
         { type: Schema.Types.ObjectId, ref: 'Course' }
     ],
