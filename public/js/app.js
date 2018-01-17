@@ -69,6 +69,7 @@ myApp.controller('addCourseController', ['$scope', '$http', '$log',
     $scope.newCourse = {};
     
     $scope.addCourse = function() {
+      alert("Route does not yet exist in this demo.");
       console.log($scope.newCourse); //TODO remove after testing
       var data = {
         name:       $scope.newCourse.name,
