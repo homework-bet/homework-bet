@@ -78,6 +78,15 @@ describe('Pool Model Tests', function () {
         });
     })
 
+    it('should have a betAmount field with a default of 25', () => {
+        const poolData = PoolFactory.random()
+
+        return PoolModel.create(poolData)
+        .then(pool => {
+            assert.equal(pool.betAmount, 25, "New pools should have a betAmount of $25 by default.")
+        })
+    })
+
     after(function (done) {
         mongoose.connection.db.dropDatabase(function () {
             mongoose.connection.close(done);
