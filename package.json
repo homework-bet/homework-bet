@@ -33,7 +33,7 @@
     "express-messages": "^1.0.1",
     "express-session": "^1.15.6",
     "moment": "^2.20.1",
-    "mongoose": "^5.0.0-rc2",
+    "mongoose": "^5.7.5",
     "nodemon": "^1.14.7"
   },
   "devDependencies": {
